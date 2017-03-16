@@ -1,0 +1,25 @@
+.header {
+    align-self: stretch;
+    text-align: center;
+    position: relative;
+}
+
+.header h1 {
+    padding:0;
+    margin:0;
+    font-size:3em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.header__current-user {
+    position: absolute;
+    top:1em;
+    right:1em;
+    display: flex;
+    align-items: center;
+}
+
+.header__current-user__display-name {
+    margin-left: 0.5em;
+}
