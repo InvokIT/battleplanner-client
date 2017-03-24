@@ -7,10 +7,7 @@ const mapStateToProps = (state) => {
     const user = state.auth.user;
 
     return {
-        loggedIn: loggedIn,
-        userDisplayName: loggedIn ? user.displayName : null,
-        userAvatarUrl: loggedIn ? user.avatarUrl : null,
-        userIsAdmin: loggedIn && !!user.isAdmin
+        user
     };
 };
 

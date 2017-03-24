@@ -1,9 +1,14 @@
 export default {
     get() {
-        return window.localStorage.getItem("jwt");
+        const jwt = window.localStorage.getItem("jwt");
+        return jwt === "null" ? null : jwt;
     },
 
     set(jwt) {
-        window.localStorage.setItem("jwt", jwt);
+        if (jwt) {
+            window.localStorage.setItem("jwt", jwt);
+        } else {
+            window.localStorage.removeItem("jwt");
+        }
     }
 };

@@ -1,2 +1,2 @@
 export { default as auth } from "./auth";
-export { default as matchId } from "./matchId";
+export { default as matches } from "./matches";

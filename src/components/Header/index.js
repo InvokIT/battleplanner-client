@@ -1,15 +1,17 @@
 import React from "react";
 import "./Header.css"
 import UserAvatar from "../UserAvatar";
+import LogoutButtonContainer from "../LogoutButtonContainer";
 
-const Header = ({userDisplayName, userAvatarUrl}) => {
+const Header = ({user}) => {
     let userUi;
 
-    if (userDisplayName || userAvatarUrl) {
+    if (user) {
         userUi = (
             <div className="header__current-user">
-                {userAvatarUrl ? <UserAvatar avatarUrl={userAvatarUrl} /> : null}
-                <span className="header__current-user__display-name">{userDisplayName}</span>
+                <UserAvatar avatarUrl={user.avatarUrl} />
+                <span className="header__current-user__display-name">{user.displayName}</span>
+                <LogoutButtonContainer />
             </div>
         );
     }
@@ -23,8 +25,7 @@ const Header = ({userDisplayName, userAvatarUrl}) => {
 };
 
 Header.propTypes = {
-    userDisplayName: React.PropTypes.string,
-    userAvatarUrl: React.PropTypes.string
+    user: React.PropTypes.object
 };
 
 export default Header;

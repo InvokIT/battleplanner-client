@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Login from "../Login";
-import { loginWithSteam } from "../../controllers/login";
+import { loginWithSteam } from "../../controllers/auth";
 
 const mapStateToProps = (state) => {
     return {

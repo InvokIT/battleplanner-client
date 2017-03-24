@@ -1,23 +1,29 @@
+import { push as pushUrl } from "react-router-redux";
 import jwtDecode from "jwt-decode";
 import jwt from "../jwt";
 
 const parseUserFromJwt = (jwt) => {
-    jwt = jwtDecode(jwt);
+    if (!jwt) {
+        return null;
+    }
 
+    jwt = jwtDecode(jwt);
     return {
         id: jwt.sub,
         avatarUrl: jwt.avatarUrl,
         displayName: jwt.displayName,
         steamId: jwt.steamId,
-        steamIdentifier: jwt.steamIdentifier
+        roles: jwt.roles || []
     };
 };
 
-export default (token) => {
+export default (token) => (dispatch) => {
     jwt.set(token);
 
-    return {
+    dispatch({
         type: "auth_finish",
         user: parseUserFromJwt(token)
-    };
+    });
+
+    dispatch(pushUrl(token ? "/matches" : "/login"));
 };
