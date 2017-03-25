@@ -1,1 +1,0 @@
-export default ({user}) => ({type: "auth_finish", user});

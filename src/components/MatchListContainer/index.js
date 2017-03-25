@@ -2,7 +2,7 @@ import {connectWithLifecycle} from "react-lifecycle-component";
 import flow from "lodash/fp/flow";
 import values from "lodash/fp/values";
 import sortBy from "lodash/fp/sortBy";
-import {matchesController} from "../../controllers";
+import {loadMatches} from "../../actions/matches";
 import MatchList from "../MatchList";
 
 const mapStateToProps = (state) => {
@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        componentDidMount: () => matchesController.loadMatches(dispatch)
+        componentDidMount: () => dispatch(loadMatches())
     };
 };
 

@@ -1,12 +1,12 @@
 const initialState = {
-    title: ""
+    name: ""
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case "match-creator_title-change":
+        case "match-creator_name-change":
             return {
-                title: action.title
+                name: action.name
             };
         default:
             return state;
