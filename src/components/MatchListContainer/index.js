@@ -1,16 +1,19 @@
-import { connectWithLifecycle } from "react-lifecycle-component";
-import { loadMatches } from "../../controllers/matches";
+import {connectWithLifecycle} from "react-lifecycle-component";
+import flow from "lodash/fp/flow";
+import values from "lodash/fp/values";
+import sortBy from "lodash/fp/sortBy";
+import {matchesController} from "../../controllers";
 import MatchList from "../MatchList";
 
 const mapStateToProps = (state) => {
     return {
-        matches: state.matches
+        matches: flow(values, sortBy(m => m.created))(state.matches)
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        componentDidMount: () => loadMatches(dispatch)
+        componentDidMount: () => matchesController.loadMatches(dispatch)
     };
 };
 

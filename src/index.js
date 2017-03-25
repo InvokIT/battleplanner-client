@@ -8,10 +8,10 @@ import createHistory from 'history/createBrowserHistory';
 import {ConnectedRouter, routerReducer, routerMiddleware} from 'react-router-redux'
 import './index.css';
 import * as reducers from "./reducers";
-import authValidate from "./actions/auth-validate";
 import HeaderContainer from "./components/HeaderContainer";
-import App from "./components/App";
+import { authController } from "./controllers";
 import LoginContainer from "./components/LoginContainer";
+import MatchBrowser from "./components/MatchBrowser";
 
 const history = createHistory();
 
@@ -32,7 +32,8 @@ const renderUi = () => {
             <ConnectedRouter history={history}>
                 <div>
                     <HeaderContainer />
-                    <Route path="/" component={App} exact={}/>
+                    <Route exact path="/matches" component={MatchBrowser} />
+                    {/*<Route path="/matches/:matchId" component={MatchBrowser} />*/}
                     <Route path="/login" component={LoginContainer}/>
                 </div>
             </ConnectedRouter>
@@ -41,4 +42,4 @@ const renderUi = () => {
     );
 };
 
-store.dispatch(authValidate()).then(renderUi);
+authController.validate(store.dispatch)().then(renderUi);

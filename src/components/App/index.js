@@ -3,7 +3,7 @@ import './App.css';
 import CreateMatchButtonContainer from "../CreateMatchButtonContainer";
 import MatchListContainer from "../MatchListContainer";
 
-const App = ({user}) => {
+const App = ({}) => {
     return (
         <div className="app">
             <CreateMatchButtonContainer/>

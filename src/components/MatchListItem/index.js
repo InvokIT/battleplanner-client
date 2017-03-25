@@ -1,6 +1,6 @@
 import React from "react";
 
-const MatchListItem = ({title, id, players}) => {
+const MatchListItem = ({title, id, players = []}) => {
     return (
         <div className="match-list-item">
             <span className="match-list-item__title">{title}</span>
