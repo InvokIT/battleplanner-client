@@ -9,7 +9,7 @@ import {ConnectedRouter, routerReducer, routerMiddleware} from 'react-router-red
 import './index.css';
 import * as reducers from "./reducers";
 import HeaderContainer from "./components/HeaderContainer";
-import { authController } from "./controllers";
+import { validate as validateAuth } from "./actions/auth";
 import LoginContainer from "./components/LoginContainer";
 import MatchBrowser from "./components/MatchBrowser";
 
@@ -42,4 +42,4 @@ const renderUi = () => {
     );
 };
 
-authController.validate(store.dispatch)().then(renderUi);
+store.dispatch(validateAuth()).then(renderUi);

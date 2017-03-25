@@ -1,18 +1,19 @@
 import React from 'react';
 import './CreateMatch.css';
 
-const CreateMatch = ({title, onTitleInput, onCreateMatch}) => {
+const CreateMatch = ({name, buttonDisabled, onNameChange, onCreateMatch}) => {
     return (
         <form onSubmit={onCreateMatch}>
-            <input type="text" placeholder="Match title" value={title} onChange={onTitleInput} />
-            <button type="submit" className="create-match-button">Create new match</button>
+            <input type="text" placeholder="Match name" value={name} onChange={onNameChange} />
+            <button type="submit" className="create-match-button" disabled={buttonDisabled}>Create new match</button>
         </form>
     );
 };
 
 CreateMatch.propTypes = {
-    title: React.PropTypes.string,
-    onTitleInput: React.PropTypes.func.isRequired,
+    name: React.PropTypes.string,
+    buttonDisabled: React.PropTypes.bool.isRequired,
+    onNameChange: React.PropTypes.func.isRequired,
     onCreateMatch: React.PropTypes.func.isRequired
 };
 

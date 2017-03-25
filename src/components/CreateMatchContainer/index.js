@@ -1,22 +1,23 @@
 import { connect } from 'react-redux';
+import get from "lodash/fp/get";
+import isEmpty from "lodash/fp/isEmpty";
 import CreateMatch from "../CreateMatch";
-import { matchesController } from "../../controllers";
-import matchCreatorTitleChangeAction from "../../actions/match-creator-title-change";
+import { createMatch, createMatchNameChange } from "../../actions/matches";
 
 const mapStateToProps = (state) => {
+    const name = get("matchCreator.name", state);
     return {
-        title: state.matchCreator.title
+        name,
+        buttonDisabled: isEmpty(name)
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const onCreateMatch = matchesController.createMatch(dispatch);
-
     return {
-        onTitleInput: (e) => dispatch(matchCreatorTitleChangeAction({title: e.target.value})),
+        onNameChange: (e) => dispatch(createMatchNameChange(e.target.value)),
         onCreateMatch: (e) => {
             e.preventDefault();
-            onCreateMatch(ownProps.title);
+            dispatch(createMatch());
         }
     };
 };

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Login from "../Login";
-import { authController } from "../../controllers";
+import { loginWithSteam } from "../../actions/auth";
 
 const mapStateToProps = (state) => {
     return {
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLoginClick: authController.loginWithSteam(dispatch)
+        onLoginClick: () => dispatch(loginWithSteam())
     };
 };
 

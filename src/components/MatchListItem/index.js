@@ -1,9 +1,9 @@
 import React from "react";
 
-const MatchListItem = ({title, id, players = []}) => {
+const MatchListItem = ({name, id, players = []}) => {
     return (
         <div className="match-list-item">
-            <span className="match-list-item__title">{title}</span>
+            <span className="match-list-item__name">{name}</span>
             <ul className="match-list-item__players">
                 {players.map(player =>
                     <li className="match-list-item__player">
@@ -17,7 +17,7 @@ const MatchListItem = ({title, id, players = []}) => {
 };
 
 MatchListItem.propTypes = {
-    title: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string.isRequired,
     id: React.PropTypes.string.isRequired,
     players: React.PropTypes.arrayOf(React.PropTypes.shape({
         displayName: React.PropTypes.string.isRequired,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import LogoutButton from "../LogoutButton";
-import { authController } from "../../controllers";
+import { logout } from "../../actions/auth";
 
 const mapStateToProps = (state) => {
     return {
@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogout: authController.logout(dispatch)
+        onLogout: () => dispatch(logout())
     };
 };
 
