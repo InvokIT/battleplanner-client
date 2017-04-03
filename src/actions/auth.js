@@ -55,7 +55,9 @@ export const loginWithSteam = () => (dispatch) => {
 
     const onMessage = (event) => {
         const origin = event.origin || event.originalEvent.origin;
-        if (origin === apiOrigin) {
+        const originRegexp = new RegExp(`^\\w+:${apiOrigin}`);
+
+        if (originRegexp.test(origin)) {
             const msg = event.data;
             if (msg.type === "auth-response") {
                 window.removeEventListener("message", onMessage, false);

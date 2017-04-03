@@ -12,6 +12,7 @@ import HeaderContainer from "./components/HeaderContainer";
 import { validate as validateAuth } from "./actions/auth";
 import LoginContainer from "./components/LoginContainer";
 import MatchBrowser from "./components/MatchBrowser";
+import MatchLobbyContainer from "./components/MatchLobbyContainer";
 
 const history = createHistory();
 
@@ -33,7 +34,7 @@ const renderUi = () => {
                 <div>
                     <HeaderContainer />
                     <Route exact path="/matches" component={MatchBrowser} />
-                    {/*<Route path="/matches/:matchId" component={MatchBrowser} />*/}
+                    <Route path="/matches/:matchId" component={MatchLobbyContainer} />
                     <Route path="/login" component={LoginContainer}/>
                 </div>
             </ConnectedRouter>
