@@ -1,6 +1,7 @@
-import flow from "lodash/fp/flow";
+// @flow
+//import flow from "lodash/fp/flow";
 import forEach from "lodash/fp/forEach";
-import difference from "lodash/fp/difference";
+import without from "lodash/fp/without";
 import keys from "lodash/fp/keys";
 import getUser from "../api/users"
 
@@ -9,18 +10,16 @@ const usersLoadedAction = (...users) => ({
     users
 });
 
-export const loadUsers = (...userIds) => (dispatch, getState) => {
+export const loadUsers = (...userIds: Array<string>) => (dispatch: (any) => void, getState: () => Object) => {
     const knownUserIds = keys(getState().users);
+    const userIdsToGet = without(knownUserIds)(userIds);
 
-    flow(
-        difference(knownUserIds),
-        forEach(userId => async userId => {
-            try {
-                const user = await getUser(userId);
-                dispatch(usersLoadedAction(user));
-            } catch (err) {
-                console.warn(`User ${userId} not found. ${err}`);
-            }
-        })
-    )(userIds);
+    forEach(async userId => {
+        try {
+            const user = await getUser(userId);
+            dispatch(usersLoadedAction(user));
+        } catch (err) {
+            console.warn(`User ${userId} not found. ${err}`);
+        }
+    })(userIdsToGet);
 };

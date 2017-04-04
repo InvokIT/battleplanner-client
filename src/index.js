@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import {Route} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import {ConnectedRouter, routerReducer, routerMiddleware} from 'react-router-redux'
+import { Redirect } from "react-router";
 import './index.css';
 import * as reducers from "./reducers";
 import HeaderContainer from "./components/HeaderContainer";
@@ -33,6 +34,9 @@ const renderUi = () => {
             <ConnectedRouter history={history}>
                 <div>
                     <HeaderContainer />
+                    <Route exact path="/" render={() =>
+                        <Redirect to="/matches"/>
+                    } />
                     <Route exact path="/matches" component={MatchBrowser} />
                     <Route path="/matches/:matchId" component={MatchLobbyContainer} />
                     <Route path="/login" component={LoginContainer}/>

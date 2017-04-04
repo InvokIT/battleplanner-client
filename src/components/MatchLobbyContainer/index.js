@@ -7,8 +7,12 @@ import at from "lodash/fp/at";
 import filter from "lodash/fp/filter";
 import isNil from "lodash/fp/isNil";
 import map from "lodash/fp/map";
+import find from "lodash/fp/find";
 import MatchLobby from "../MatchLobby";
 import {connectToMatch, disconnectFromMatch} from "../../actions/matches";
+import {getMatchStateDescription} from "../../text";
+import {loadMatch} from "../../actions/matches"
+import {maps} from "../../config";
 
 const getMatchIdFromOwnProps = get("match.params.matchId");
 
@@ -52,7 +56,7 @@ const getTeams = (matchId) => (state) => {
         getLobby(matchId),
         get("teams"),
         defaultTo([[], []])
-    );
+    )(state);
 
     const users = get("users")(state);
 
@@ -72,24 +76,49 @@ const getLoading = (matchId) => flow(
     defaultTo(true)
 );
 
+const getStateDescription = (matchId) => flow(
+    getLobby(matchId),
+    get("state.name"),
+    getMatchStateDescription
+);
+
+const getTitle = (matchId) => get(`matches.${matchId}.name`);
+
+const getCurrentMap = (matchId) => flow(
+    getCurrentRound(matchId),
+    get("map"),
+    (mapId) => find(m => m.id === mapId, maps),
+    defaultTo({image: null, name:""})
+);
+
 const mapStateToProps = (state, ownProps) => {
     const matchId = getMatchIdFromOwnProps(ownProps);
+    const isLoading = getLoading(matchId)(state);
 
     return {
-        loading: getLoading(matchId)(state),
-        currentRound: getCurrentRound(matchId)(state),
-        rounds: getRounds(matchId)(state),
-        players: getPlayers(matchId)(state),
-        teams: getTeams(matchId)(state)
+        loading: isLoading,
+        title: getTitle(matchId)(state),
+        matchState: isLoading ? null : {
+            description: getStateDescription(matchId)(state),
+            map: getCurrentMap(matchId)(state),
+            rounds: getRounds(matchId)(state),
+            players: getPlayers(matchId)(state),
+            teams: getTeams(matchId)(state)
+        }
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        componentDidMount: () => dispatch(connectToMatch(getMatchIdFromOwnProps(ownProps))),
-        componentWillUnmount: () => dispatch(disconnectFromMatch(getMatchIdFromOwnProps(ownProps)))
-    };
-};
+        return {
+            componentDidMount: () => {
+                const matchId = getMatchIdFromOwnProps(ownProps);
+                dispatch(connectToMatch(matchId));
+                dispatch(loadMatch(matchId));
+            },
+            componentWillUnmount: () => dispatch(disconnectFromMatch(getMatchIdFromOwnProps(ownProps)))
+        };
+    }
+;
 
 const MatchLobbyContainer = connectWithLifecycle(mapStateToProps, mapDispatchToProps)(MatchLobby);
 

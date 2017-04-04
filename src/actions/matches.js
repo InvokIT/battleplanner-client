@@ -6,6 +6,8 @@ import invokeLoadMatches from "../api/matches";
 import MatchLobbyApi from "../api/match-lobby";
 import {loadUsers} from "./users";
 
+type t_dispatch = (any) => void;
+
 const matchCreatingAction = () => ({
     type: "match_creating"
 });
@@ -36,7 +38,7 @@ export const createMatchNameChange = (name) => ({
     name
 });
 
-export const createMatch = () => (dispatch, getState) => {
+export const createMatch = () => (dispatch : t_dispatch, getState) => {
     dispatch(matchCreatingAction());
 
     const name = get("matchCreator.name", getState());
@@ -55,7 +57,7 @@ export const createMatch = () => (dispatch, getState) => {
         );
 };
 
-export const loadMatches = () => (dispatch) => {
+export const loadMatches = () => (dispatch : t_dispatch) => {
     dispatch(matchesLoadingAction());
 
     return invokeLoadMatches()
@@ -67,6 +69,11 @@ export const loadMatches = () => (dispatch) => {
                 dispatch(matchesLoadedAction({matches: []}));
             }
         );
+};
+
+export const loadMatch = (matchId: string) => async (dispatch: t_dispatch) => {
+    const match = await invokeLoadMatches(matchId);
+    dispatch(matchLoadedAction({match}));
 };
 
 const matchLobbies: Map<string, MatchLobbyApi> = new Map();
@@ -98,7 +105,7 @@ const matchLobbyPlayersUpdateAction = (matchId, players) => ({
     players
 });
 
-export const connectToMatch = (matchId) => async (dispatch) => {
+export const connectToMatch = (matchId: string) => async (dispatch: t_dispatch) => {
     if (matchLobbies.has(matchId)) {
         console.warn(`Already connected to match ${matchId}`);
         return;
@@ -109,7 +116,7 @@ export const connectToMatch = (matchId) => async (dispatch) => {
         onMatchStateUpdate: (state) => dispatch(matchLobbyStateUpdateAction(matchId, state)),
         onPlayerListUpdate: (players) => {
             dispatch(matchLobbyPlayersUpdateAction(matchId, players));
-            dispatch(loadUsers(players));
+            dispatch(loadUsers(...players));
         },
         onConnecting: () => dispatch(matchLobbyConnectingAction(matchId)),
         onConnected: () => dispatch(matchLobbyConnectedAction(matchId)),
@@ -121,13 +128,14 @@ export const connectToMatch = (matchId) => async (dispatch) => {
     matchLobbies.set(matchId, matchLobby);
 };
 
-export const disconnectFromMatch = (matchId) => (dispatch) => {
-    if (!matchLobbies.has(matchId)) {
+export const disconnectFromMatch = (matchId: string) => (dispatch: t_dispatch) => {
+    const matchLobby = matchLobbies.get(matchId);
+
+    if (!matchLobby) {
         console.warn(`Not connected to match ${matchId}`);
         return;
     }
 
-    const matchLobby = matchLobbies.get(matchId);
     matchLobbies.delete(matchId);
     matchLobby.close();
 };
