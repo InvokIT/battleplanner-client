@@ -1,0 +1,29 @@
+.match-rounds {
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.match-round {
+    position: relative;
+    width:10em;
+    height:8em;
+    background-color: rgba(100,100,100,0.5);
+    border:2px solid black;
+    margin:1em;
+    flex-grow: 1;
+}
+
+.match-round .match-round__number {
+    position:absolute;
+    top:-1em;
+    left:50%;
+    margin-left:-1em;
+    width:2em;
+    height:2em;
+    border-radius: 50%;
+    background-color: rgba(64,64,64,1);
+    border: 2px solid black;
+    line-height:2em;
+    text-align: center;
+}

@@ -1,0 +1,35 @@
+.match-lobby {
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-grow:1;
+}
+
+.match-lobby > * {
+    margin:2em;
+}
+
+.match-lobby .team {
+    width:10em;
+    padding:1em;
+    background-color: rgba(100,100,100,0.5);
+    border:2px solid black;
+    display:flex;
+    justify-content: flex-start;
+}
+
+.match-lobby .team.team_0 {
+    justify-content: flex-end;
+}
+
+.match-lobby .team .team__slot {
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.match-lobby .team.team_0 .team__slot {
+    justify-content: flex-end;
+}

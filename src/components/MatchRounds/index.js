@@ -1,13 +1,18 @@
+import "./match-rounds.css";
+
 import React from "react";
+import get from "lodash/fp/get";
+import isNil from "lodash/fp/isNil";
 import {roundShape} from "../shapes";
 
 const MatchRounds = ({rounds}) => (
     <div className="match-rounds">
         {rounds.map((round, i) => (
-            <div key={i} className={`match-round match-round__${i}`}>
-                <div className="match-round__map">{round.map.name}</div>
-                <div className="match-round__winner">{round.winner.displayName}</div>
-                <div className="match-round__victory-points">{round.winnerVictoryPoints}</div>
+            <div key={i} className={`match-round match-round_${i} ${isNil("winner", round) ? "match-round__played" : "match-round__not-played"}`}>
+                <div className="match-round__number"><span>{i+1}</span></div>
+                <div className="match-round__map">{get("map.name", round)}</div>
+                <div className="match-round__winner">{get("winner.displayName", round)}</div>
+                <div className="match-round__victory-points">{get("winnerVictoryPoints", round)}</div>
             </div>
         ))}
     </div>

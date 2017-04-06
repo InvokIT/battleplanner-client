@@ -12,6 +12,14 @@ import faymonvilleImage from "./gfx/faymonville_approach.jpg";
 import kholodnyImage from "./gfx/kholodny_ferma_summer.jpg";
 import crossroadsImage from "./gfx/crossroads.jpg";
 import crossingInTheWoodsImage from "./gfx/crossing_in_the_woods.jpg";
+import factionUsfImage from "./gfx/faction_aef.png";
+import factionUkfImage from "./gfx/faction_british.png";
+import factionOstheerImage from "./gfx/faction_german.png";
+import factionSovietImage from "./gfx/faction_soviet.png";
+import factionOkwImage from "./gfx/faction_west_german.png";
+import factionMissingImage from "./gfx/faction_missing.png";
+
+export const teamSize = 1;
 
 export const maps = [
     {
@@ -36,6 +44,39 @@ export const maps = [
         id: "crossing in the woods",
         image: crossingInTheWoodsImage,
         name: "Crossing in the Woods"
+    }
+];
+
+export const factions = [
+    {
+        id: "usf",
+        name: "US Forces",
+        image: factionUsfImage
+    },
+    {
+        id: "ukf",
+        name: "British Forces",
+        image: factionUkfImage
+    },
+    {
+        id: "ostheer",
+        name: "Wehrmacht Ostheer",
+        image: factionOstheerImage
+    },
+    {
+        id: "soviet",
+        name: "Soviet Union",
+        image: factionSovietImage
+    },
+    {
+        id: "okw",
+        name: "Oberkommando West",
+        image: factionOkwImage
+    },
+    {
+        id: "missing",
+        name:"",
+        image: factionMissingImage
     }
 ];
 

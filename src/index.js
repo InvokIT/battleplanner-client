@@ -1,3 +1,6 @@
+import './index.css';
+import 'react-select/dist/react-select.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
@@ -7,7 +10,6 @@ import {Route} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import {ConnectedRouter, routerReducer, routerMiddleware} from 'react-router-redux'
 import { Redirect } from "react-router";
-import './index.css';
 import * as reducers from "./reducers";
 import HeaderContainer from "./components/HeaderContainer";
 import { validate as validateAuth } from "./actions/auth";
@@ -32,7 +34,7 @@ const renderUi = () => {
     ReactDOM.render(
         <Provider store={store}>
             <ConnectedRouter history={history}>
-                <div>
+                <div className="app-root">
                     <HeaderContainer />
                     <Route exact path="/" render={() =>
                         <Redirect to="/matches"/>

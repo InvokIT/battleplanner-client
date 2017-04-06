@@ -2,12 +2,13 @@
 import noop from "lodash/fp/noop";
 import once from "lodash/fp/once";
 import isNumber from "lodash/fp/isNumber";
+import isEmpty from "lodash/fp/isEmpty";
 import {retryAsync} from "../util/retry";
 import jwtStore from "../jwt-store";
 
 type apiProps = {
     matchId: string,
-    onMatchStateUpdate: (state : any) => void,
+    onMatchStateUpdate: (state: any) => void,
     onPlayerListUpdate: (players: []) => void,
     onConnecting?: () => void,
     onConnected?: () => void,
@@ -51,10 +52,39 @@ class MatchLobbyApi {
         }
     }
 
+    assignPlayerToTeam(playerId: string, team: number, teamSlot: number): void {
+        this._withSocket(socket => {
+            socket.send(JSON.stringify({
+                type: "state-change",
+                name: "update-team-player-slot",
+                params: {
+                    team: team,
+                    teamSlot: teamSlot,
+                    playerId: isEmpty(playerId) ? null : playerId
+                }
+            }));
+        });
+    }
+
+    lockTeams(): void {
+        this._withSocket(socket => {
+            socket.send(JSON.stringify({
+                type: "state-change",
+                name: "teams-complete"
+            }));
+        });
+    }
+
+    _withSocket(fn: (WebSocket) => void) {
+        if (this._socket) {
+            fn(this._socket);
+        }
+    }
+
     async _openSocket() {
         this.props.onConnecting && this.props.onConnecting();
 
-        const wsUrl = `ws:${process.env.REACT_APP_API_ORIGIN}/matches/${this.props.matchId}`;
+        const wsUrl = `ws:${(process:Object).env.REACT_APP_API_ORIGIN}/matches/${this.props.matchId}`;
 
         const socket = await retryAsync(
             this.props.connectionRetries || 5,
