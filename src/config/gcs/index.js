@@ -51,27 +51,32 @@ export const factions = [
     {
         id: "usf",
         name: "US Forces",
-        image: factionUsfImage
+        image: factionUsfImage,
+        side: "allies"
     },
     {
         id: "ukf",
         name: "British Forces",
-        image: factionUkfImage
+        image: factionUkfImage,
+        side: "allies"
     },
     {
         id: "ostheer",
         name: "Wehrmacht Ostheer",
-        image: factionOstheerImage
+        image: factionOstheerImage,
+        side: "axis"
     },
     {
         id: "soviet",
         name: "Soviet Union",
-        image: factionSovietImage
+        image: factionSovietImage,
+        side: "allies"
     },
     {
         id: "okw",
         name: "Oberkommando West",
-        image: factionOkwImage
+        image: factionOkwImage,
+        side: "axis"
     },
     {
         id: "missing",

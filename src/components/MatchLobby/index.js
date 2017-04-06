@@ -3,6 +3,7 @@ import "./match-lobby.css";
 import React from "react";
 import Loading from "../Loading";
 import AssignPlayersToTeams from "./AssignPlayersToTeams";
+import ChooseInitiator from "./ChooseInitiator";
 
 const MatchLobby = ({loading, matchId, matchStateName}) => {
     if (loading) {
@@ -13,6 +14,10 @@ const MatchLobby = ({loading, matchId, matchStateName}) => {
         case "assign-players-to-teams":
             return (
                 <AssignPlayersToTeams matchId={matchId} />
+            );
+        case "choose-initiator":
+            return (
+                <ChooseInitiator matchId={matchId} />
             );
         default:
             console.warn("Unknown match state");

@@ -2,6 +2,7 @@
     display:flex;
     flex-flow: row nowrap;
     justify-content: center;
+    padding:0 0.75em;
 }
 
 .match-round {
@@ -10,13 +11,23 @@
     height:8em;
     background-color: rgba(100,100,100,0.5);
     border:2px solid black;
-    margin:1em;
+    margin:1.5em 0.75em;
     flex-grow: 1;
 }
 
+/*
+.match-round:first-child {
+    margin-left: 1.5em;
+}
+
+.match-round:last-child {
+    margin-right: 1.5em;
+}
+*/
+
 .match-round .match-round__number {
     position:absolute;
-    top:-1em;
+    bottom:-1em;
     left:50%;
     margin-left:-1em;
     width:2em;

@@ -16,16 +16,15 @@ export default (state = initialState, action) => {
                 set(`${matchId}.loading`, true)
             )(state);
         case "match-lobby_connected":
-            return update(
-                set(`${matchId}.loading`, false)
-            )(state);
+            return state;
         case "match-lobby_disconnected":
             return update(
                 unset(matchId)
             )(state);
         case "match-lobby_state-update":
             return update(
-                set(`${matchId}.state`, action.state)
+                set(`${matchId}.state`, action.state),
+                set(`${matchId}.loading`, false)
             )(state);
         case "match-lobby_players-update":
             return update(

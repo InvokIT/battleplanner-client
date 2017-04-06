@@ -4,22 +4,14 @@ import get from "lodash/fp/get";
 import has from "lodash/fp/has";
 import eq from "lodash/fp/eq";
 import defaultTo from "lodash/fp/defaultTo";
-// import sortBy from "lodash/fp/sortBy";
-// import at from "lodash/fp/at";
-// import filter from "lodash/fp/filter";
-// import isNil from "lodash/fp/isNil";
-// import map from "lodash/fp/map";
-// import find from "lodash/fp/find";
+import flatten from "lodash/fp/flatten";
+import every from "lodash/fp/every";
 import MatchLobby from "../MatchLobby";
 import {
     connectToMatch,
     disconnectFromMatch,
-    // assignPlayerToTeam,
-    // lockTeams
 } from "../../actions/match-lobby";
-// import {getMatchStateDescription} from "../../text";
 import {loadMatch} from "../../actions/matches"
-// import {maps, teamSize, factions} from "../../config";
 
 const getMatchIdFromOwnProps = get("match.params.matchId");
 
@@ -89,7 +81,15 @@ const getLoading = (matchId) => (state) => {
         eq(false)
     );
 
-    return lobbyLoading(state) || matchLoading(state);
+    const teamsLoading = flow(
+            getLobby(matchId),
+            get("state.data.teams"),
+            flatten,
+            every(playerId => has(`users.${playerId}`, state)),
+            eq(false)
+        );
+
+    return lobbyLoading(state) || matchLoading(state) || teamsLoading(state);
 };
 
 // const getStateDescription = (matchId) => flow(
