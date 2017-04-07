@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router";
 import CreateMatchContainer from "../CreateMatchContainer";
-import MatchListContainer from "../MatchListContainer";
+// import MatchListContainer from "../MatchListContainer";
 
 const MatchBrowser = ({isAuthenticated}) => {
     if (!isAuthenticated) {
@@ -11,7 +11,7 @@ const MatchBrowser = ({isAuthenticated}) => {
     return (
         <div className="match-browser">
             <CreateMatchContainer/>
-            <MatchListContainer/>
+            {/*<MatchListContainer/>*/}
         </div>
     );
 };

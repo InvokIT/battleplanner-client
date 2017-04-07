@@ -1,5 +1,5 @@
 const initialState = {
-    name: ""
+    name: "alpha match"
 };
 
 export default (state = initialState, action) => {
