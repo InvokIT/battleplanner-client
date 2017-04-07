@@ -1,18 +1,23 @@
 .login-component {
-
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-component__steam-button {
-  background-color: #171a21;
-  text-align:center;
-  border:0;
-  padding:0.6em 0.4em;
-  margin:0;
-  border-radius: 1em;
-  font-size: 1em;
-  color:white;
-  font-family:'Oswald', sans-serif;
-  cursor: pointer;
+    flex-grow: 0;
+    background-color: #171a21;
+    text-align: center;
+    border: 0;
+    padding: 0.6em 0.4em;
+    margin: 0;
+    border-radius: 1em;
+    font-size: 1em;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    cursor: pointer;
 }
 
 .login-component__steam-button > * {
@@ -20,5 +25,5 @@
 }
 
 .login-component__steam-button aside {
-  font-size:0.5em;
+    font-size: 0.5em;
 }

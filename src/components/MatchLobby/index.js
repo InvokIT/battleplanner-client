@@ -1,12 +1,20 @@
 import "./match-lobby.css";
 
 import React from "react";
+import { Redirect } from "react-router";
 import Loading from "../Loading";
 import AssignPlayersToTeams from "./AssignPlayersToTeams";
 import ChooseInitiator from "./ChooseInitiator";
 import SelectMapOrFaction from "./SelectMapOrFaction";
 
-const MatchLobby = ({loading, matchId, matchStateName, matchStateDescription}) => {
+const MatchLobby = ({isAuthenticated, currentLocation, loading, matchId, matchStateName, matchStateDescription}) => {
+    if (!isAuthenticated) {
+        return <Redirect to={{
+            pathname: "/login",
+            state: {from: currentLocation}
+        }} />;
+    }
+
     if (loading) {
         return <Loading/>;
     }
@@ -56,6 +64,8 @@ const MatchLobby = ({loading, matchId, matchStateName, matchStateDescription}) =
 };
 
 MatchLobby.propTypes = {
+    isAuthenticed: React.PropTypes.bool.isRequired,
+    currentLocation: React.PropTypes.object,
     loading: React.PropTypes.bool.isRequired,
     matchId: React.PropTypes.string.isRequired,
     matchStateName: React.PropTypes.string,

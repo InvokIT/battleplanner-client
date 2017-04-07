@@ -1,15 +1,18 @@
 import React from "react";
 import "./LogoutButton.css"
 
-const LogoutButton = ({onLogout}) => {
+const LogoutButton = ({isAuthenticated, onLogout}) => {
+    if (!isAuthenticated) {
+        return null;
+    }
+
     return (
-        <div className="logout-button">
-            <button onClick={onLogout}>Log out</button>
-        </div>
+        <button className="logout-button" onClick={onLogout}>Log out</button>
     );
 };
 
 LogoutButton.propTypes = {
+    isAuthenticated: React.PropTypes.bool.isRequired,
     onLogout: React.PropTypes.func.isRequired
 };
 

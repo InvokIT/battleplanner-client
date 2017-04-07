@@ -1,9 +1,8 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import flow from "lodash/fp/flow";
 import get from "lodash/fp/get";
 import eq from "lodash/fp/eq";
-import LogoutButton from "../LogoutButton";
-import { logout } from "../../actions/auth";
+import MatchBrowser from "../MatchBrowser";
 import authStages from "../../auth-stages";
 
 const isAuthenticated = flow(
@@ -19,10 +18,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogout: () => dispatch(logout())
+
     };
 };
 
-const LogoutButtonContainer = connect(mapStateToProps, mapDispatchToProps)(LogoutButton);
+const MatchBrowserContainer = connect(mapStateToProps, mapDispatchToProps)(MatchBrowser);
 
-export default LogoutButtonContainer;
+MatchBrowserContainer.propTypes = {
+};
+
+export default MatchBrowserContainer;

@@ -13,7 +13,7 @@ import * as reducers from "./reducers";
 import HeaderContainer from "./components/HeaderContainer";
 import { validate as validateAuth } from "./actions/auth";
 import LoginContainer from "./components/LoginContainer";
-import MatchBrowser from "./components/MatchBrowser";
+import MatchBrowserContainer from "./components/MatchBrowserContainer";
 import MatchLobbyContainer from "./components/MatchLobbyContainer";
 
 const history = createHistory();
@@ -38,7 +38,7 @@ const renderUi = () => {
                     <Route exact path="/" render={() =>
                         <Redirect to="/matches"/>
                     } />
-                    <Route exact path="/matches" component={MatchBrowser} />
+                    <Route exact path="/matches" component={MatchBrowserContainer} />
                     <Route path="/matches/:matchId" component={MatchLobbyContainer} />
                     <Route path="/login" component={LoginContainer}/>
                 </div>
@@ -49,3 +49,4 @@ const renderUi = () => {
 };
 
 store.dispatch(validateAuth()).then(renderUi);
+
