@@ -48,7 +48,7 @@ export const loginWithSteam = (from) => (dispatch) => {
 
     onAuthBegin(dispatch);
 
-    const windowSrc = `//${apiOrigin}/auth/steam`;
+    const windowSrc = `${apiOrigin}/auth/steam`;
     const authWindow = window.open(windowSrc, "Steam Login", "centerscreen,width=1000,height=750,resizable,scrollbars,status");
 
     const onMessage = (event) => {
