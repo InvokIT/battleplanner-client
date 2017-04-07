@@ -36,6 +36,14 @@
 }
 
 .match-lobby__state-description {
-    align-self: center;
-    margin-top:1em;
+    position:relative;
+    flex-grow: 1;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+}
+
+.match-lobby__state-description > * {
+    position:absolute;
+    bottom: 2em;
 }

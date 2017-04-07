@@ -16,7 +16,7 @@ const SelectMapOrFaction = ({matchId, stateDescription}) => (
                 </div>
                 <TeamContainer matchId={matchId} teamIndex={1}/>
             </div>
-            <div className="match-lobby__state-description">{stateDescription}</div>
+            <div className="match-lobby__state-description"><span>{stateDescription}</span></div>
         </div>
         <MatchRoundsContainer matchId={matchId}/>
     </div>
