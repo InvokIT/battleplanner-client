@@ -1,0 +1,17 @@
+.faction {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.faction__image {
+    width:5em;
+    height:5em;
+    background-size: cover;
+    flex-shrink: 0;
+}
+
+.faction__name {
+    display: none;
+}

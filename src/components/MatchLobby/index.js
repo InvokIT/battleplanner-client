@@ -1,51 +1,65 @@
+import "./match-lobby.css";
+
 import React from "react";
-import FactionPlayer from "../FactionPlayer";
+import Loading from "../Loading";
+import AssignPlayersToTeams from "./AssignPlayersToTeams";
+import ChooseInitiator from "./ChooseInitiator";
+import SelectMapOrFaction from "./SelectMapOrFaction";
 
-const MatchLobby = ({currentRound, rounds, players, teams}) => (
-    <div className="match">
-        {teams.map((t, i) => (
-            <div className={`match__team match__team-${i}`}>
-                {t.map(p => <FactionPlayer displayName={p.displayName} faction={p.faction} />)}
-            </div>
-        ))}
-        <div className="match__coin">
-        </div>
-        <div className="match__map">
-        </div>
-        <div className="match__actions">
-        </div>
-    </div>
-);
+const MatchLobby = ({loading, matchId, matchStateName, matchStateDescription}) => {
+    if (loading) {
+        return <Loading/>;
+    }
 
-const roundShape = React.PropTypes.shape({
-    map: React.PropTypes.shape({
-        name: React.PropTypes.string.isRequired,
-        imageUrl: React.PropTypes.string.isRequired
-    }),
-    result: React.PropTypes.shape({
-        
-    })
-});
+    switch (matchStateName) {
+        case "assign-players-to-teams":
+            return (
+                <AssignPlayersToTeams matchId={matchId} stateDescription={matchStateDescription} />
+            );
+        case "choose-initiator":
+            return (
+                <ChooseInitiator matchId={matchId} stateDescription={matchStateDescription} />
+            );
+        case "select-map-or-faction":
+            return (
+                <SelectMapOrFaction matchId={matchId} stateDescription={matchStateDescription} />
+            );
+        default:
+            console.warn("Unknown match state");
+            return <div>Unknown match state</div>;
+    }
 
-const playerShape = React.PropTypes.shape({
-    displayName: React.PropTypes.string.isRequired,
-    avatarUrl: React.PropTypes.string.isRequired,
-});
-
-const teamPlayerShape = React.PropTypes.shape({
-    displayName: React.PropTypes.string.isRequired,
-    faction: React.PropTypes.shape({
-        name: React.PropTypes.string.isRequired,
-        imageUrl: React.PropTypes.string.isRequired
-    })
-});
+    // return (
+    //     <div className="match-lobby">
+    //         <div className="match-lobby__title">{title}</div>
+    //         <div className="match-lobby__state-description">{description}</div>
+    //         {teams.map((t, i) => (
+    //             <div key={i} className={`match-lobby__team match-lobby__team__${i}`}>
+    //                 {t.map(p => <FactionPlayer player={p} faction={p.faction} />)}
+    //             </div>
+    //         ))}
+    //         <div className="match-lobby__coin">
+    //         </div>
+    //         <div className="match-lobby__map">
+    //             <div className="match-lobby__map-image" style={{backgroundImage:map.image}}></div>
+    //             <div className="match-lobby__map-name"><span>{map.name}</span></div>
+    //         </div>
+    //         <div className="match-lobby__actions">
+    //         </div>
+    //         <div className="match-lobby__players">
+    //         </div>
+    //         <div className="match-lobby__rounds">
+    //             <MatchRounds rounds={rounds} />
+    //         </div>
+    //     </div>
+    // );
+};
 
 MatchLobby.propTypes = {
     loading: React.PropTypes.bool.isRequired,
-    currentRound: roundShape.isRequired,
-    rounds: React.PropTypes.arrayOf(roundShape).isRequired,
-    players: React.PropTypes.arrayOf(playerShape).isRequired,
-    teams: React.PropTypes.arrayOf(React.PropTypes.arrayOf(teamPlayerShape)).isRequired
+    matchId: React.PropTypes.string.isRequired,
+    matchStateName: React.PropTypes.string,
+    matchStateDescription: React.PropTypes.string
 };
 
 export default MatchLobby;

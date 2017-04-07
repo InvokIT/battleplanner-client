@@ -29,8 +29,6 @@ const onAuthSuccess = (dispatch, jwt) => {
         type: "auth_finish",
         user: parseUserFromJwt(jwt)
     });
-
-    dispatch(pushLocation("/matches"));
 };
 
 const onAuthFail = (dispatch) => {
@@ -63,6 +61,8 @@ export const loginWithSteam = () => (dispatch) => {
                 window.removeEventListener("message", onMessage, false);
                 authWindow.close();
                 onAuthSuccess(dispatch, msg.value);
+
+                dispatch(pushLocation("/matches"));
             }
         } else {
             onAuthFail(dispatch);
