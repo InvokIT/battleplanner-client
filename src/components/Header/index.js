@@ -1,6 +1,5 @@
 import React from "react";
 import "./Header.css"
-import UserAvatar from "../UserAvatar";
 import LogoutButtonContainer from "../LogoutButtonContainer";
 
 const Header = ({user}) => {
