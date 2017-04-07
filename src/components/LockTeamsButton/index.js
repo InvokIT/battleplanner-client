@@ -4,7 +4,7 @@ import React from "react";
 
 const LockTeamsButton = ({canLock, onButtonClicked}) => (
     <div className="lock-team-button">
-        <button onClick={onButtonClicked} disabled={!canLock}>Lock teams</button>
+        <button onClick={onButtonClicked} disabled={!canLock}>Continue</button>
     </div>
 );
 

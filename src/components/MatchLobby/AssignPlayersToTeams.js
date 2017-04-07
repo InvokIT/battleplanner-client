@@ -14,7 +14,10 @@ const AssignPlayersToTeams = ({matchId, stateDescription}) => (
                 </div>
                 <AssignableTeamContainer matchId={matchId} teamIndex={1}/>
             </div>
-            <div className="match-lobby__state-description">{stateDescription}</div>
+            <div className="match-lobby__state-description">
+                {/*<span>{stateDescription}</span>*/}
+                <span>Send the following link to your opponent:<br/><code>{window.location.href}</code></span>
+            </div>
         </div>
         <MatchRoundsContainer matchId={matchId}/>
     </div>
