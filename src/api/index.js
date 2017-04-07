@@ -14,7 +14,7 @@ const request = (method, path, body) => fetch(
             "Authorization": `Bearer ${jwt.get()}`,
             "Content-Type": "application/json"
         },
-        mode: process.env.NODE_ENV === "production" ? "same-origin" : "cors"
+        mode: "cors"
     }
 ).then(res => {
    if (res.ok) {
