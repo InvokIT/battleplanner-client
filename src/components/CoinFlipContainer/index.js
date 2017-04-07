@@ -34,12 +34,19 @@ const isInitiatorSelected = (matchId) => flow(
     eq(false)
 );
 
+const isMatchOwner = (matchId) => (state) => {
+    const currentUserId = get("auth.user.id")(state);
+    const matchOwnerId = get(`matches.${matchId}.owner`)(state);
+
+    return currentUserId === matchOwnerId;
+};
+
 const canFlipCoin = (matchId) => (state) => {
-    return !isAnimating(matchId)(state) && !isInitiatorSelected(matchId)(state);
+    return isMatchOwner(matchId)(state) && !isAnimating(matchId)(state) && !isInitiatorSelected(matchId)(state);
 };
 
 const canContinue = (matchId) => (state) => {
-    return !isAnimating(matchId)(state) && isInitiatorSelected(matchId)(state);
+    return isMatchOwner(matchId)(state) && !isAnimating(matchId)(state) && isInitiatorSelected(matchId)(state);
 };
 
 const mapStateToProps = (state, {matchId}) => {
