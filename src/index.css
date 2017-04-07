@@ -111,6 +111,7 @@ button:disabled {
     animation: 500ms linear 0s infinite alternate click-me-animation;
     transform-origin: center center;
     cursor:pointer;
+    text-transform: uppercase;
 }
 
 @keyframes click-me-animation {

@@ -64,7 +64,7 @@ const MatchLobby = ({isAuthenticated, currentLocation, loading, matchId, matchSt
 };
 
 MatchLobby.propTypes = {
-    isAuthenticed: React.PropTypes.bool.isRequired,
+    isAuthenticated: React.PropTypes.bool.isRequired,
     currentLocation: React.PropTypes.object,
     loading: React.PropTypes.bool.isRequired,
     matchId: React.PropTypes.string.isRequired,

@@ -158,6 +158,8 @@ class MatchLobbyApi {
                 const players = data.players;
                 this.props.onPlayerListUpdate(players);
                 break;
+            case "ping":
+                break;
             default:
                 console.error(`Received unknown message '${data.type}'.`);
         }
