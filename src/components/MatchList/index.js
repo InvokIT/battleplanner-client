@@ -6,18 +6,14 @@ const MatchList = ({matches}) => {
     return (
         <div className="match-list">
             <ul>
-                {matches.list.map(m => <MatchListItem {...m} />)}
+                {matches.map(m => <MatchListItem key={m.id} {...m} />)}
             </ul>
         </div>
     );
 };
 
 MatchList.propTypes = {
-    matches: React.PropTypes.shape({
-        error: React.PropTypes.string,
-        loading: React.PropTypes.bool,
-        list: React.PropTypes.array
-    })
+    matches: React.PropTypes.array.isRequired
 };
 
 export default MatchList;

@@ -1,4 +1,4 @@
-import jwt from "../jwt";
+import jwt from "../jwt-store";
 
 const API_ORIGIN = process.env.REACT_APP_API_ORIGIN;
 
@@ -14,17 +14,16 @@ const request = (method, path, body) => fetch(
             "Authorization": `Bearer ${jwt.get()}`,
             "Content-Type": "application/json"
         },
-        mode: "same-origin"
+        mode: process.env.NODE_ENV === "production" ? "same-origin" : "cors"
     }
 ).then(res => {
    if (res.ok) {
-       return res.json();
+       return res.status === 204 ? null : res.json();
    } else {
        throw new Error(`Could not ${method} to ${path}: ${res.status} ${res.statusText}`);
    }
 });
 
-const get = (path) => request("GET", path);
-const post = (path, body) => request("POST", path, body);
-
-export const getMatches = () => get("/matches");
+export const get = (path) => request("GET", path);
+export const post = (path, body) => request("POST", path, body);
+export const put = (path, body) => request("PUT", path, body);

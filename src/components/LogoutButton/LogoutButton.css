@@ -1,0 +1,9 @@
+.logout-button {
+    position: absolute;
+    top:0;
+    right:0;
+    background-color:transparent;
+    border:none;
+    box-shadow: none;
+    text-transform: lowercase;
+}

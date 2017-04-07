@@ -1,0 +1,64 @@
+.player-with-faction {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.player-with-faction__faction {
+    margin:-1em;
+    position: relative;
+}
+
+.player-with-faction__faction-click-area {
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    text-align:center;
+    cursor: pointer;
+    display: none;
+}
+
+.can-select-faction .player-with-faction__faction-click-area {
+    display:block;
+}
+
+.player-with-faction__faction-click-text {
+    position: relative;
+    top: 1em;
+    font-size: 1em;
+}
+
+.team.team_1 .player-with-faction__faction {
+    order: -1;
+}
+
+.player-with-faction__player {
+    margin:0 0em;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.player-with-faction__player-avatar {
+    width:3em;
+    height:3em;
+    background-size: cover;
+    border:0.01em solid black;
+    margin: 0 1em;
+}
+
+.player-with-faction__player-name {
+    font-size: 1.6em;
+}
+
+.team.team_0 .player-with-faction__player-avatar {
+    order: 1;
+}
+
+.team.team_1 .player-with-faction__player-avatar {
+    order: -1;
+}
+

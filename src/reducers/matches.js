@@ -1,22 +1,22 @@
-const initialState = {
-    loading: false,
-    error: null,
-    list: []
-};
+const initialState = {};
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case "matches_load":
-            return {
-                loading: true,
-                error: null,
-                list: []
-            };
+        case "matches_loading":
+            return {};
         case "matches_loaded":
+            return action.matches.reduce(
+                (acc, m) => {
+                    acc[m.id] = m;
+                    return acc;
+                },
+                {}
+            );
+        case "match_loaded":
+            const match = action.match;
             return {
-                loading: false,
-                error: action.error,
-                list: action.matches
+                ...state,
+                [match.id]: match
             };
         default:
             return state;
