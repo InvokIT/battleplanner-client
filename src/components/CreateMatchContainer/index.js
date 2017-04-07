@@ -10,7 +10,7 @@ const getMatchCreatorName = flow(
     defaultTo("")
 );
 
-const isNameValid = (name) => name.length > 2;
+const isNameValid = (name) => true;//name.length > 2;
 
 const mapStateToProps = (state) => {
     const name = getMatchCreatorName(state);

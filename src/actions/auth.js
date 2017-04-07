@@ -39,11 +39,11 @@ const onAuthFail = (dispatch) => {
         user: null
     });
 
-    dispatch(pushLocation("/login"));
+    //dispatch(pushLocation("/login"));
 };
 
 
-export const loginWithSteam = () => (dispatch) => {
+export const loginWithSteam = (from) => (dispatch) => {
     const apiOrigin = process.env.REACT_APP_API_ORIGIN;
 
     onAuthBegin(dispatch);
@@ -62,7 +62,7 @@ export const loginWithSteam = () => (dispatch) => {
                 authWindow.close();
                 onAuthSuccess(dispatch, msg.value);
 
-                dispatch(pushLocation("/matches"));
+                dispatch(pushLocation(from ? from : "/matches"));
             }
         } else {
             onAuthFail(dispatch);

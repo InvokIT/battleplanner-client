@@ -15,6 +15,7 @@ import {
 } from "../../actions/match-lobby";
 import {loadMatch} from "../../actions/matches"
 import matchStateDescriptions from "../../text/match-state-descriptions";
+import authStages from "../../auth-stages";
 
 const getMatchIdFromOwnProps = get("match.params.matchId");
 
@@ -135,10 +136,17 @@ const getMatchStateDescription = (matchId) => (state) => {
     }
 };
 
+const isAuthenticated = flow(
+    get("auth.stage"),
+    eq(authStages.authorized)
+);
+
 const mapStateToProps = (state, ownProps) => {
     const matchId = getMatchIdFromOwnProps(ownProps);
 
     return {
+        isAuthenticated: isAuthenticated(state),
+        currentLocation: ownProps.location,
         loading: getLoading(matchId)(state),
         matchId: matchId,
         matchStateName: getMatchStateName(matchId)(state),

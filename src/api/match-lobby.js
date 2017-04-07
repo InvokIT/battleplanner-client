@@ -91,7 +91,9 @@ class MatchLobbyApi {
     async _openSocket() {
         this.props.onConnecting && this.props.onConnecting();
 
-        const wsUrl = `ws:${(process:Object).env.REACT_APP_API_ORIGIN}/matches/${this.props.matchId}`;
+        const wsProtocol = process.env.NODE_ENV === "production" ? "wss" : "ws";
+
+        const wsUrl = `${wsProtocol}:${(process:Object).env.REACT_APP_API_ORIGIN}/matches/${this.props.matchId}`;
 
         const socket = await retryAsync(
             this.props.connectionRetries || 5,
@@ -155,6 +157,8 @@ class MatchLobbyApi {
             case "players-update":
                 const players = data.players;
                 this.props.onPlayerListUpdate(players);
+                break;
+            case "ping":
                 break;
             default:
                 console.error(`Received unknown message '${data.type}'.`);
