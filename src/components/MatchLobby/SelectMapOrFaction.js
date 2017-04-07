@@ -1,18 +1,20 @@
+import "./select-map-or-faction.css";
+
 import React from "react";
 import MatchRoundsContainer from "../MatchRoundsContainer";
-import AssignableTeamContainer from "../AssignableTeamContainer";
-import LockTeamsButtonContainer from "../LockTeamsButtonContainer"
+import TeamContainer from "../TeamContainer";
+import LobbyMapContainer from "../LobbyMapContainer";
 
-const AssignPlayersToTeams = ({matchId, stateDescription}) => (
+const SelectMapOrFaction = ({matchId, stateDescription}) => (
     <div className="app-content">
         <div className="match-lobby">
             {/*<div className="match-lobby__title">{title}</div>*/}
             <div className="match-lobby__components">
-                <AssignableTeamContainer matchId={matchId} teamIndex={0}/>
+                <TeamContainer matchId={matchId} teamIndex={0}/>
                 <div className="match-lobby_center-component">
-                    <LockTeamsButtonContainer matchId={matchId}/>
+                    <LobbyMapContainer matchId={matchId} />
                 </div>
-                <AssignableTeamContainer matchId={matchId} teamIndex={1}/>
+                <TeamContainer matchId={matchId} teamIndex={1}/>
             </div>
             <div className="match-lobby__state-description">{stateDescription}</div>
         </div>
@@ -20,9 +22,10 @@ const AssignPlayersToTeams = ({matchId, stateDescription}) => (
     </div>
 );
 
-AssignPlayersToTeams.propTypes = {
+SelectMapOrFaction.propTypes = {
     matchId: React.PropTypes.string.isRequired,
     stateDescription: React.PropTypes.string.isRequired
 };
 
-export default AssignPlayersToTeams;
+
+export default SelectMapOrFaction;

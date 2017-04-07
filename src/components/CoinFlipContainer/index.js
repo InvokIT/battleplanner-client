@@ -3,7 +3,11 @@ import {connect} from 'react-redux';
 import flow from "lodash/fp/flow";
 import get from "lodash/fp/get";
 import map from "lodash/fp/map";
+import defaultTo from "lodash/fp/defaultTo";
+import isNil from "lodash/fp/isNil";
+import eq from "lodash/fp/eq";
 import CoinFlip from "../CoinFlip";
+import {flipCoinAction, flipCoinAnimationEndAction, continueAction} from "../../actions/match-lobby"
 
 const getFaces = (matchId) => (state) => flow(
     get(`matchLobbies.${matchId}.state.data.teams`),
@@ -14,18 +18,44 @@ const getFaces = (matchId) => (state) => flow(
     })
 )(state);
 
-const getResult = (matchId) => get(`matchLobbies.${matchId}.state.data.initiator`);
+const getInitiator = (matchId) => flow(
+    get(`matchLobbies.${matchId}.state.data.initiator`),
+    defaultTo(null)
+);
+
+const isAnimating = (matchId) => flow(
+    get(`matchLobbies.${matchId}.coinFlip.isAnimating`),
+    defaultTo(false)
+);
+
+const isInitiatorSelected = (matchId) => flow(
+    get(`matchLobbies.${matchId}.state.data.initiator`),
+    isNil,
+    eq(false)
+);
+
+const canFlipCoin = (matchId) => (state) => {
+    return !isAnimating(matchId)(state) && !isInitiatorSelected(matchId)(state);
+};
+
+const canContinue = (matchId) => (state) => {
+    return !isAnimating(matchId)(state) && isInitiatorSelected(matchId)(state);
+};
 
 const mapStateToProps = (state, {matchId}) => {
     return {
         faces: getFaces(matchId)(state),
-        result: getResult(matchId)(state)
+        canFlipCoin: canFlipCoin(matchId)(state),
+        canContinue: canContinue(matchId)(state),
+        winnerFaceIndex: getInitiator(matchId)(state)
     };
 };
 
 const mapDispatchToProps = (dispatch, {matchId}) => {
     return {
-        onFlipCoinButtonClick: (e) => console.log("Coin flip!")
+        onFlipCoinButtonClick: (e) => dispatch(flipCoinAction(matchId)),
+        onFlipCoinAnimationEnd: (e) => dispatch(flipCoinAnimationEndAction(matchId)),
+        onContinueButtonClick: (e) => dispatch(continueAction(matchId))
     };
 };
 

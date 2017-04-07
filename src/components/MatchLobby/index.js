@@ -4,8 +4,9 @@ import React from "react";
 import Loading from "../Loading";
 import AssignPlayersToTeams from "./AssignPlayersToTeams";
 import ChooseInitiator from "./ChooseInitiator";
+import SelectMapOrFaction from "./SelectMapOrFaction";
 
-const MatchLobby = ({loading, matchId, matchStateName}) => {
+const MatchLobby = ({loading, matchId, matchStateName, matchStateDescription}) => {
     if (loading) {
         return <Loading/>;
     }
@@ -13,11 +14,15 @@ const MatchLobby = ({loading, matchId, matchStateName}) => {
     switch (matchStateName) {
         case "assign-players-to-teams":
             return (
-                <AssignPlayersToTeams matchId={matchId} />
+                <AssignPlayersToTeams matchId={matchId} stateDescription={matchStateDescription} />
             );
         case "choose-initiator":
             return (
-                <ChooseInitiator matchId={matchId} />
+                <ChooseInitiator matchId={matchId} stateDescription={matchStateDescription} />
+            );
+        case "select-map-or-faction":
+            return (
+                <SelectMapOrFaction matchId={matchId} stateDescription={matchStateDescription} />
             );
         default:
             console.warn("Unknown match state");
@@ -52,8 +57,9 @@ const MatchLobby = ({loading, matchId, matchStateName}) => {
 
 MatchLobby.propTypes = {
     loading: React.PropTypes.bool.isRequired,
-    matchId: React.PropTypes.string,
-    matchStateName: React.PropTypes.string
+    matchId: React.PropTypes.string.isRequired,
+    matchStateName: React.PropTypes.string,
+    matchStateDescription: React.PropTypes.string
 };
 
 export default MatchLobby;

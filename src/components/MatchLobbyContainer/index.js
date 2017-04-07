@@ -6,12 +6,15 @@ import eq from "lodash/fp/eq";
 import defaultTo from "lodash/fp/defaultTo";
 import flatten from "lodash/fp/flatten";
 import every from "lodash/fp/every";
+import isNil from "lodash/fp/isNil";
+import head from "lodash/fp/head";
 import MatchLobby from "../MatchLobby";
 import {
     connectToMatch,
     disconnectFromMatch,
 } from "../../actions/match-lobby";
 import {loadMatch} from "../../actions/matches"
+import matchStateDescriptions from "../../text/match-state-descriptions";
 
 const getMatchIdFromOwnProps = get("match.params.matchId");
 
@@ -70,26 +73,25 @@ const getLobby = (matchId) => get(`matchLobbies.${matchId}`);
 // };
 
 const getLoading = (matchId) => (state) => {
-    const lobbyLoading = flow(
+    const lobbyLoaded = flow(
         getLobby(matchId),
         get("loading"),
-        defaultTo(true)
-    );
-
-    const matchLoading = flow(
-        has(`matches.${matchId}`),
+        defaultTo(true),
         eq(false)
     );
 
-    const teamsLoading = flow(
-            getLobby(matchId),
-            get("state.data.teams"),
-            flatten,
-            every(playerId => has(`users.${playerId}`, state)),
-            eq(false)
-        );
+    const matchLoaded = flow(
+        has(`matches.${matchId}`)
+    );
 
-    return lobbyLoading(state) || matchLoading(state) || teamsLoading(state);
+    const teamsLoaded = flow(
+        getLobby(matchId),
+        get("state.data.teams"),
+        flatten,
+        every(playerId => isNil(playerId) || has(`users.${playerId}`, state))
+    );
+
+    return !(lobbyLoaded(state) && matchLoaded(state) && teamsLoaded(state));
 };
 
 // const getStateDescription = (matchId) => flow(
@@ -110,13 +112,37 @@ const getMatchStateName = (matchId) => flow(
     get("state.name")
 );
 
+const getMatchStateDescription = (matchId) => (state) => {
+    const currentTeam = flow(
+        getLobby(matchId),
+        get("state.data.currentTeam")
+    )(state);
+
+    const currentPlayerId = flow(
+        getLobby(matchId),
+        get(`state.data.teams[${currentTeam}]`),
+        head
+    )(state);
+
+    const currentPlayer = get(`users.${currentPlayerId}`)(state);
+
+    const currentStateName = getMatchStateName(matchId)(state);
+
+    if (currentPlayer && currentStateName in matchStateDescriptions) {
+        return matchStateDescriptions[currentStateName](currentPlayer);
+    } else {
+        return "";
+    }
+};
+
 const mapStateToProps = (state, ownProps) => {
     const matchId = getMatchIdFromOwnProps(ownProps);
 
     return {
         loading: getLoading(matchId)(state),
         matchId: matchId,
-        matchStateName: getMatchStateName(matchId)(state)
+        matchStateName: getMatchStateName(matchId)(state),
+        matchStateDescription: getMatchStateDescription(matchId)(state)
     };
 };
 

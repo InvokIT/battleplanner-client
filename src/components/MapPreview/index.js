@@ -1,16 +1,18 @@
+import "./map-preview.css";
+
 import React from "react";
 import get from "lodash/fp/get";
 import {mapShape} from "../shapes";
 
-const MapPreview = ({map}) => (
-    <div className="map-preview" title={get("name", map)}>
-        <div className="map-preview__image" style={{backgroundImage:get("image", map)}}/>
-        <div className="map-preview__name"><span>{get("name", map)}</span></div>
+const MapPreview = ({scenario}) => (
+    <div className="map-preview" title={get("name", scenario)}>
+        <img className="map-preview__image" alt={get("name", scenario)} src={get("image", scenario)}/>
+        <div className="map-preview__name"><span>{get("name", scenario)}</span></div>
     </div>
 );
 
 MapPreview.propTypes = {
-    map: mapShape
+    scenario: mapShape
 };
 
 export default MapPreview;

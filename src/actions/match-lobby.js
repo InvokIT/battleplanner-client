@@ -86,3 +86,26 @@ export const lockTeams = (matchId: string) => (dispatch: t_dispatch) => {
     });
 
 };
+
+export const continueAction = (matchId: string) => (dispatch: t_dispatch) => {
+    withLobby(matchId, (matchLobby) => {
+        matchLobby.continue();
+    });
+};
+
+export const flipCoinAnimationStartAction = (matchId: string) => ({
+    type: "flip-coin-animation-start",
+    matchId: matchId
+});
+
+export const flipCoinAnimationEndAction = (matchId: string) => ({
+    type: "flip-coin-animation-end",
+    matchId: matchId
+});
+
+export const flipCoinAction = (matchId: string) => (dispatch: t_dispatch) => {
+    withLobby(matchId, (matchLobby) => {
+        matchLobby.flipCoin();
+        dispatch(flipCoinAnimationStartAction(matchId));
+    });
+};

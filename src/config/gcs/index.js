@@ -80,7 +80,7 @@ export const factions = [
     },
     {
         id: "missing",
-        name:"",
+        name:"No faction selected",
         image: factionMissingImage
     }
 ];

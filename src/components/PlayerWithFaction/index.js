@@ -1,24 +1,44 @@
-import React from "react";
-import {playerShape} from "../shapes";
+import "./player-with-faction.css";
 
-const PlayerWithFaction = ({player, faction}) => (
-    <div className="player-with-faction">
-        <div className="player-with-faction__faction" title={faction.name}>
-            <div className="player-with-faction__faction__image" style={{backgroundImage: faction.image}}/>
-            <div className="player-with-faction__faction__name">{faction.name}</div>
+import React from "react";
+import find from "lodash/fp/find";
+import get from "lodash/fp/get";
+import noop from "lodash/fp/noop";
+import Faction from "../Faction";
+import {playerShape, factionShape} from "../shapes";
+import { factions } from "../../config";
+
+const missingFaction = find(f => f.id === "missing", factions);
+
+const PlayerWithFaction = ({player, faction = missingFaction, canSelectFaction = false, onSelectFactionClick = noop}) => {
+    const classNames = ["player-with-faction"];
+
+    if (canSelectFaction) {
+        classNames.push("can-select-faction");
+    }
+
+    return (
+        <div className={classNames.join(" ")}>
+            <div className="player-with-faction__player">
+                <div className="player-with-faction__player-avatar" style={{backgroundImage: `url(${get("avatarUrl", player)})`}}/>
+                <div className="player-with-faction__player-name">{get("displayName", player)}</div>
+            </div>
+            <div className="player-with-faction__faction">
+                <Faction faction={faction} />
+                <div className="player-with-faction__faction-click-area">
+                    <div className="player-with-faction__faction-click-text click-me-text"><span>Click to select faction</span></div>
+                </div>
+            </div>
         </div>
-        <div className="player-with-faction__avatar" style={{backgroundImage:player.avatarUrl}} />
-        <div className="player-with-faction__display-name">{player.displayName}</div>
-    </div>
-);
+    );
+};
 
 
 PlayerWithFaction.propTypes = {
-    player: playerShape.isRequired,
-    faction: React.PropTypes.shape({
-        image: React.PropTypes.string.isRequired,
-        name: React.PropTypes.string.isRequired
-    }).isRequired
+    player: playerShape,
+    faction: factionShape,
+    canSelectFaction: React.PropTypes.bool,
+    onSelectFactionClick: React.PropTypes.func
 };
 
 export default PlayerWithFaction;

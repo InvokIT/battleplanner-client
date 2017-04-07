@@ -1,9 +1,0 @@
-{
-  "assign-players-to-teams": "Assign players to teams",
-  "choose-initiator": "Toss the coin!",
-  "Play game": "Play the game!",
-  "post-result-and-replays": "Post replays and match results",
-  "select-faction": "{player.displayName} selects faction",
-  "select-map": "{player.displayName} selects map",
-  "select-map-or-faction": "{player.displayName} selects map or faction first"
-}

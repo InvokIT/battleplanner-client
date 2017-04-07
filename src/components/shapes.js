@@ -21,16 +21,18 @@ export const roundShape = PropTypes.shape({
     winnerVictoryPoints: PropTypes.number
 });
 
-export const playerAndFactionShape = PropTypes.shape({
-    player: playerShape.isRequired,
-    faction: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired
-    })
+export const factionShape = PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired
 });
 
-export const mapShape = {
+export const playerAndFactionShape = PropTypes.shape({
+    player: playerShape.isRequired,
+    faction: factionShape.isRequired
+});
+
+export const mapShape = PropTypes.shape({
     id: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
-};
+});

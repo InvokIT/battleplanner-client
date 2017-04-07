@@ -1,17 +1,40 @@
 .match-rounds {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.match-rounds__title {
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.match-rounds__title::before {
+    content: "";
+    position:absolute;
+    bottom:0.2em;
+    left:0;
+    height:0.1em;
+    width: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
+}
+
+.match-rounds .match-rounds__items {
     display:flex;
     flex-flow: row nowrap;
     justify-content: center;
     padding:0 0.75em;
 }
 
-.match-round {
+.match-rounds .match-round {
     position: relative;
     width:10em;
     height:8em;
     background-color: rgba(100,100,100,0.5);
     border:2px solid black;
-    margin:1.5em 0.75em;
+    margin:0.5em 0.75em 1.5em;
     flex-grow: 1;
 }
 
@@ -25,7 +48,7 @@
 }
 */
 
-.match-round .match-round__number {
+.match-rounds .match-round .match-round__number {
     position:absolute;
     bottom:-1em;
     left:50%;

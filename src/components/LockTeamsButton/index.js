@@ -1,3 +1,5 @@
+import "./lock-team-button.css";
+
 import React from "react";
 
 const LockTeamsButton = ({canLock, onButtonClicked}) => (

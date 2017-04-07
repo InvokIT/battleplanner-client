@@ -53,24 +53,31 @@ class MatchLobbyApi {
     }
 
     assignPlayerToTeam(playerId: string, team: number, teamSlot: number): void {
-        this._withSocket(socket => {
-            socket.send(JSON.stringify({
-                type: "state-change",
-                name: "update-team-player-slot",
-                params: {
-                    team: team,
-                    teamSlot: teamSlot,
-                    playerId: isEmpty(playerId) ? null : playerId
-                }
-            }));
+        this._sendStateChange("update-team-player-slot", {
+            team: team,
+            teamSlot: teamSlot,
+            playerId: isEmpty(playerId) ? null : playerId
         });
     }
 
     lockTeams(): void {
+        this._sendStateChange("teams-complete");
+    }
+
+    continue(): void {
+        this._sendStateChange("continue");
+    }
+
+    flipCoin(): void {
+        this._sendStateChange("flip-coin");
+    }
+
+    _sendStateChange(name: string, params: ?Object): void {
         this._withSocket(socket => {
             socket.send(JSON.stringify({
                 type: "state-change",
-                name: "teams-complete"
+                name: name,
+                params: params
             }));
         });
     }
