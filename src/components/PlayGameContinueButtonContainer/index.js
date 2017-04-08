@@ -12,8 +12,8 @@ const isMatchOwner = (matchId) => (state) => {
 };
 
 const canContinue = (matchId) => (state) => {
-    const currentRound = get(`matchLobby[${matchId}].state.data.currentRound`);
-    if (currentRound > 1) {
+    const currentRound = get(`matchLobbies[${matchId}].state.data.currentRound`)(state);
+    if (currentRound > 0) {
         return false;
     }
 
