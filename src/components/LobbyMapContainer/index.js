@@ -8,6 +8,7 @@ import findIndex from "lodash/fp/findIndex";
 import includes from "lodash/fp/includes";
 import LobbyMap from "../LobbyMap";
 import {maps} from "../../config";
+import {mapSelectorOpenAction} from "../../actions/match-lobby";
 
 const getMap = (matchId) => (state) => {
     const currentRound = get(`matchLobbies.${matchId}.state.data.currentRound`)(state);
@@ -40,7 +41,7 @@ const mapStateToProps = (state, {matchId}) => {
 
 const mapDispatchToProps = (dispatch, {matchId}) => {
     return {
-        onSelectMapClick: (e) => console.log("select map clicked")
+        onSelectMapClick: (e) => dispatch(mapSelectorOpenAction())
     };
 };
 

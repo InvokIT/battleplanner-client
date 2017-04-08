@@ -1,4 +1,7 @@
 // @flow
+import flow from "lodash/fp/flow";
+import get from "lodash/fp/get";
+import flatten from "lodash/fp/flatten";
 import MatchLobbyApi from "../api/match-lobby";
 import {loadUsers} from "./users";
 
@@ -52,7 +55,10 @@ export const connectToMatch = (matchId: string) => async (dispatch: t_dispatch) 
 
     const matchLobby = new MatchLobbyApi({
         matchId,
-        onMatchStateUpdate: (state) => dispatch(matchLobbyStateUpdateAction(matchId, state)),
+        onMatchStateUpdate: (state) => {
+            dispatch(matchLobbyStateUpdateAction(matchId, state));
+            dispatch(loadUsers(...flow(get("data.teams"), flatten)(state)))
+        },
         onPlayerListUpdate: (players) => {
             dispatch(matchLobbyPlayersUpdateAction(matchId, players));
             dispatch(loadUsers(...players));
@@ -107,5 +113,45 @@ export const flipCoinAction = (matchId: string) => (dispatch: t_dispatch) => {
     withLobby(matchId, (matchLobby) => {
         matchLobby.flipCoin();
         dispatch(flipCoinAnimationStartAction(matchId));
+    });
+};
+
+export const factionSelectorOpenAction = () => ({
+    type: "faction-selector_open"
+});
+
+export const factionSelectorCloseAction = () => ({
+    type: "faction-selector_close"
+});
+
+export const selectFactionAction = (matchId, faction) => (dispatch) => {
+    withLobby(matchId, async (matchLobby) => {
+        try {
+            await matchLobby.selectFaction(faction.id);
+            dispatch(factionSelectorCloseAction());
+        } catch (err) {
+            // TODO Error handling
+            console.log("Error while selecting faction. " + err.message);
+        }
+    });
+};
+
+export const mapSelectorOpenAction = () => ({
+    type: "map-selector_open"
+});
+
+export const mapSelectorCloseAction = () => ({
+    type: "map-selector_close"
+});
+
+export const selectMapAction = (matchId, map) => (dispatch) => {
+    withLobby(matchId, async (matchLobby) => {
+        try {
+            await matchLobby.selectMap(map.id);
+            dispatch(mapSelectorCloseAction());
+        } catch (err) {
+            // TODO Error handling
+            console.log("Error while selecting map. " + err.message);
+        }
     });
 };

@@ -15,10 +15,10 @@ const LobbyMap = ({scenario, canSelectMap = false, onSelectMapClick = noop}) => 
     return (
         <div className={classNames.join(" ")}>
             <MapPreview scenario={scenario}/>
-            <div className="lobby-map__title"><span>Map</span></div>
             <div className="lobby-map__click-area" onClick={onSelectMapClick}>
                 <div className="lobby-map__click-text click-me-text"><span>Click to select map</span></div>
             </div>
+            <div className="lobby-map__title"><span>Map</span></div>
         </div>
     );
 };

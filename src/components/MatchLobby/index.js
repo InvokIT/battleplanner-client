@@ -6,6 +6,7 @@ import Loading from "../Loading";
 import AssignPlayersToTeams from "./AssignPlayersToTeams";
 import ChooseInitiator from "./ChooseInitiator";
 import SelectMapOrFaction from "./SelectMapOrFaction";
+import PlayGame from "./PlayGame";
 
 const MatchLobby = ({isAuthenticated, currentLocation, loading, matchId, matchStateName, matchStateDescription}) => {
     if (!isAuthenticated) {
@@ -29,8 +30,14 @@ const MatchLobby = ({isAuthenticated, currentLocation, loading, matchId, matchSt
                 <ChooseInitiator matchId={matchId} stateDescription={matchStateDescription} />
             );
         case "select-map-or-faction":
+        case "select-map":
+        case "select-faction":
             return (
                 <SelectMapOrFaction matchId={matchId} stateDescription={matchStateDescription} />
+            );
+        case "play-game":
+            return (
+                <PlayGame matchId={matchId} stateDescription={matchStateDescription} />
             );
         default:
             console.warn("Unknown match state");
