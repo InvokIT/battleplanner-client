@@ -9,6 +9,7 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: stretch;
+    z-index:100;
 }
 
 .map-selector__title {
