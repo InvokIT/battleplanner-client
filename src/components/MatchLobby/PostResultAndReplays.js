@@ -3,8 +3,7 @@ import "./select-map-or-faction.css";
 import React from "react";
 import MatchRoundsContainer from "../MatchRoundsContainer";
 import TeamContainer from "../TeamContainer";
-import LobbyMapContainer from "../LobbyMapContainer";
-import PlayGameContinueButtonContainer from "../PlayGameContinueButtonContainer";
+import PostResultsContainer from "../PostResultsContainer";
 
 const PlayGame = ({matchId, stateDescription}) => (
     <div className="app-content">
@@ -13,14 +12,11 @@ const PlayGame = ({matchId, stateDescription}) => (
             <div className="match-lobby__components">
                 <TeamContainer matchId={matchId} teamIndex={0}/>
                 <div className="match-lobby_center-component">
-                    <LobbyMapContainer matchId={matchId}/>
+                    <PostResultsContainer matchId={matchId} />
                 </div>
                 <TeamContainer matchId={matchId} teamIndex={1}/>
             </div>
-            <div className="match-lobby__state-description">
-                <div>Play the game!</div>
-                <PlayGameContinueButtonContainer matchId={matchId} />
-            </div>
+            <div className="match-lobby__state-description"><span>{stateDescription}</span></div>
         </div>
         <MatchRoundsContainer matchId={matchId}/>
     </div>

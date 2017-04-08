@@ -7,6 +7,7 @@ import AssignPlayersToTeams from "./AssignPlayersToTeams";
 import ChooseInitiator from "./ChooseInitiator";
 import SelectMapOrFaction from "./SelectMapOrFaction";
 import PlayGame from "./PlayGame";
+// import PostResultAndReplays from "./PostResultAndReplays";
 
 const MatchLobby = ({isAuthenticated, currentLocation, loading, matchId, matchStateName, matchStateDescription}) => {
     if (!isAuthenticated) {
@@ -39,6 +40,10 @@ const MatchLobby = ({isAuthenticated, currentLocation, loading, matchId, matchSt
             return (
                 <PlayGame matchId={matchId} stateDescription={matchStateDescription} />
             );
+        // case "post-result-and-replays":
+        //     return (
+        //         <PostResultAndReplays matchId={matchId} stateDescription={matchStateDescription} />
+        //     );
         default:
             console.warn("Unknown match state");
             return <div>Unknown match state</div>;
