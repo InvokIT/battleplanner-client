@@ -1,10 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import flow from "lodash/fp/flow";
 import get from "lodash/fp/get";
-import flatten from "lodash/fp/flatten";
-import every from "lodash/fp/every";
-import isNil from "lodash/fp/isNil";
 import PlayGameContinueButton from "../PlayGameContinueButton";
 import {continueAction} from "../../actions/match-lobby";
 
