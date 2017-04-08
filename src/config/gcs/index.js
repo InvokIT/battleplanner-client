@@ -8,6 +8,9 @@ import sortBy from "lodash/fp/sortBy";
 import head from "lodash/fp/head";
 import tail from "lodash/fp/tail";
 import isNil from "lodash/fp/isNil";
+import find from "lodash/fp/find";
+import findIndex from "lodash/fp/findIndex";
+import includes from "lodash/fp/includes";
 import faymonvilleImage from "./gfx/faymonville_approach.jpg";
 import kholodnyImage from "./gfx/kholodny_ferma_summer.jpg";
 import crossroadsImage from "./gfx/crossroads.jpg";
@@ -43,7 +46,8 @@ export const maps = [
     {
         id: "crossing in the woods",
         image: crossingInTheWoodsImage,
-        name: "Crossing in the Woods"
+        name: "Crossing in the Woods",
+        deciderPreference: 4
     }
 ];
 
@@ -107,4 +111,42 @@ export const findDeciderMap = (matchState) => {
     } else {
         return selectedDeciderMap;
     }
+};
+
+export const getSelectableFactions = (matchLobby, playerId) => {
+    const currentRound = get("state.data.currentRound")(matchLobby);
+    const thisPlayerTeam = flow(
+        get(`state.data.teams`),
+        findIndex(t => includes(playerId, t))
+    )(matchLobby);
+
+    const otherTeamPlayerId = flow(
+        get(`state.data.teams[${(thisPlayerTeam + 1) % 2}]`),
+        head
+    )(matchLobby);
+
+    const factionIdOfOtherTeamPlayer = get(`state.data.rounds[${currentRound}].factions.${otherTeamPlayerId}`)(matchLobby);
+    const otherTeamSide = flow(
+        find(f => f.id === factionIdOfOtherTeamPlayer),
+        get("side")
+    )(factions);
+
+    let disallowedSide = otherTeamSide;
+
+    // Every second round we can only choose from the other side
+    if (isNil(disallowedSide) && currentRound % 2 !== 0) {
+        const previousFactionId = get(`state.data.rounds[${currentRound-1}].factions[${playerId}]`)(matchLobby);
+        const previousFaction = find(f => f.id === previousFactionId)(factions);
+        const previousSide = get("side")(previousFaction);
+        disallowedSide = previousSide;
+    }
+
+    return flow(
+        filter(has("side")),
+        filter(f => f.side !== disallowedSide)
+    )(factions);
+};
+
+export const getSelectableMaps = (matchState, playerId) => {
+    return maps;
 };

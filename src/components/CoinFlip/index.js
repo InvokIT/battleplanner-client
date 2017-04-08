@@ -33,7 +33,7 @@ const CoinFlip = ({faces, canFlipCoin, canContinue, onFlipCoinButtonClick, onFli
 CoinFlip.propTypes = {
     faces: React.PropTypes.arrayOf(React.PropTypes.shape({
         name: React.PropTypes.string,
-        image: React.PropTypes.string.isRequired
+        image: React.PropTypes.string
     })),
     canFlipCoin: React.PropTypes.bool.isRequired,
     canContinue: React.PropTypes.bool.isRequired,

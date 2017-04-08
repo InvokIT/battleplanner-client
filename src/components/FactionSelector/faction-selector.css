@@ -1,0 +1,68 @@
+.faction-selector {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.faction-selector__title {
+    text-transform: uppercase;
+    font-size: 1.2em;
+    text-align: center;
+    z-index:10;
+    position: relative;
+    margin:2em;
+}
+
+.faction-selector__items {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color:rgba(100,100,100,0.5);
+    padding:1em;
+    position: relative;
+    height:5em;
+}
+
+.faction-selector__items::before, .faction-selector__items::after {
+    content: "";
+    position:absolute;
+    left:0;
+    height:0.1em;
+    width: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
+}
+
+.faction-selector__items::before {
+    top:0;
+}
+
+.faction-selector__items::after {
+    bottom:0;
+}
+
+.faction-selector__item {
+    flex-grow: 0;
+    font-size: 1.5em;
+    cursor: pointer;
+    will-change: transform;
+    z-index:11;
+    transition: transform 400ms, filter 400ms;
+    margin:1.5em;
+}
+
+.faction-selector__item:hover {
+    transform: scale(1.2);
+    filter:drop-shadow(0 0 0.2em white) brightness(150%);
+}
+
+.faction-selector__cancel-button {
+    text-align: center;
+}

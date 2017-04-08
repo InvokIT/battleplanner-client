@@ -31,6 +31,11 @@ html, body {
     font-size: 1.5em;
 }
 
+a, a:visited, a:link, a:hover, a:active {
+    color: goldenrod;
+    text-decoration: underline;
+}
+
 .fullscreen-bg {
     position: absolute;
     top: 0;
@@ -76,7 +81,7 @@ button {
     text-transform: uppercase;
     padding: 0.1em 0.6em;
     margin: 0;
-    box-shadow: 0 0 0.75em white;
+    box-shadow: 0 0 1em white;
 }
 
 button:disabled {

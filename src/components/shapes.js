@@ -8,15 +8,18 @@ export const matchShape = PropTypes.shape({
 
 export const playerShape = PropTypes.shape({
     displayName: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string,
     id: PropTypes.string.isRequired
 });
 
+export const mapShape = PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+});
+
 export const roundShape = PropTypes.shape({
-    map: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired
-    }),
+    map: mapShape,
     winner: playerShape,
     winnerVictoryPoints: PropTypes.number
 });
@@ -31,8 +34,3 @@ export const playerAndFactionShape = PropTypes.shape({
     faction: factionShape.isRequired
 });
 
-export const mapShape = PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-});

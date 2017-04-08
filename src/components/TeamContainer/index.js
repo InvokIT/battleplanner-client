@@ -12,6 +12,7 @@ import includes from "lodash/fp/includes";
 import isNil from "lodash/fp/isNil";
 import Team from "../Team";
 import {factions} from "../../config";
+import {factionSelectorOpenAction} from "../../actions/match-lobby";
 
 const getTeam = (matchId, teamIndex) => (state) => {
     const matchState = get(`matchLobbies.${matchId}.state.data`)(state);
@@ -29,7 +30,7 @@ const getTeam = (matchId, teamIndex) => (state) => {
                 factionId = "missing";
             } else {
                 factionId = flow(
-                    get(`rounds[${currentRound}].factions.${player.id})`),
+                    get(`rounds[${currentRound}].factions[${player.id}]`),
                     defaultTo("missing")
                 )(matchState);
             }
@@ -57,7 +58,7 @@ const canSelectFaction = (matchId, teamIndex) => (state) => {
         findIndex(t => includes(currentUserId, t))
     )(state);
 
-    return includes(currentStateName, allowedStates) && currentTeam === teamOfUser;
+    return teamOfUser === teamIndex && currentTeam === teamOfUser && includes(currentStateName, allowedStates);
 };
 
 const mapStateToProps = (state, {matchId, teamIndex}) => {
@@ -70,7 +71,7 @@ const mapStateToProps = (state, {matchId, teamIndex}) => {
 
 const mapDispatchToProps = (dispatch, {matchId, teamIndex}) => {
     return {
-        onSelectFactionClick: (e) => console.log("select faction click")
+        onSelectFactionClick: () => dispatch(factionSelectorOpenAction())
     };
 };
 

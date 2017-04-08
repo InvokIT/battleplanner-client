@@ -50,7 +50,7 @@
 
 .match-rounds .match-round .match-round__number {
     position:absolute;
-    bottom:-1em;
+    top:-0.5em;
     left:50%;
     margin-left:-1em;
     width:2em;
@@ -60,4 +60,26 @@
     border: 2px solid black;
     line-height:2em;
     text-align: center;
+    z-index: 2;
+}
+
+.match-rounds .match-round.match-round__current-round .match-round__number {
+    animation: 1s linear 0s infinite alternate round-number-animation;
+}
+
+@keyframes round-number-animation {
+    from {
+        box-shadow: 0 0 1em 0.4em white;
+    }
+    to {
+        box-shadow: 0 0 2em 0.4em white;
+    }
+}
+
+.match-rounds .match-round .map-preview__image {
+    filter: brightness(50%);
+}
+
+.match-rounds .match-round.match-round__current-round .map-preview__image {
+    filter: brightness(100%);
 }

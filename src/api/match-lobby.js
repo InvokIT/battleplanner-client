@@ -69,7 +69,22 @@ class MatchLobbyApi {
     }
 
     flipCoin(): void {
-        this._sendStateChange("flip-coin");
+        this._sendStateChange("choose-initiator", {
+            // TODO Move this to server-side
+            team: Math.floor(Math.random() * 2)
+        });
+    }
+
+    selectFaction(factionId): void {
+        this._sendStateChange("select-faction", {
+            faction: factionId
+        });
+    }
+
+    selectMap(mapId): void {
+        this._sendStateChange("select-map", {
+            map: mapId
+        });
     }
 
     _sendStateChange(name: string, params: ?Object): void {

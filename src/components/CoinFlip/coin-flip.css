@@ -62,6 +62,7 @@
     /*backface-visibility: hidden;*/
     transform: rotateY(0deg);
     box-sizing: border-box;
+    background-color:#404040;
 }
 
 .coin .coin-face > * {
