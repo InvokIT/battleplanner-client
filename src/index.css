@@ -85,7 +85,7 @@ button {
 }
 
 button:disabled {
-    /*display:none;*/
+    display:none;
     color: rgba(255, 255, 255, 0.5);
     cursor: default;
     box-shadow: none;

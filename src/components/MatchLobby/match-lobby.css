@@ -40,10 +40,11 @@
     flex-grow: 1;
     align-self: stretch;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding-bottom:1em;
 }
 
 .match-lobby__state-description > * {
-    position:absolute;
-    bottom: 2em;
 }
