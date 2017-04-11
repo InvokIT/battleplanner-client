@@ -27,8 +27,8 @@
 
 .player-with-faction__faction-click-text {
     position: relative;
-    top: 1em;
-    font-size: 1em;
+    top: 0.5em;
+    font-size: 0.9em;
 }
 
 .team.team_1 .player-with-faction__faction {
@@ -40,6 +40,7 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    flex-basis: 0;
 }
 
 .player-with-faction__player-avatar {
@@ -51,7 +52,8 @@
 }
 
 .player-with-faction__player-name {
-    font-size: 1.6em;
+    font-size: 1.2em;
+    white-space: nowrap;
 }
 
 .team.team_0 .player-with-faction__player-avatar {

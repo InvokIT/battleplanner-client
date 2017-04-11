@@ -4,6 +4,8 @@ import React from "react";
 import find from "lodash/fp/find";
 import get from "lodash/fp/get";
 import noop from "lodash/fp/noop";
+import defaultTo from "lodash/fp/defaultTo";
+import flow from "lodash/fp/flow";
 import Faction from "../Faction";
 import {playerShape, factionShape} from "../shapes";
 import { factions } from "../../config";
@@ -17,15 +19,20 @@ const PlayerWithFaction = ({player, faction = missingFaction, canSelectFaction =
         classNames.push("can-select-faction");
     }
 
+    const playerName = flow(
+        get("displayName"),
+        defaultTo("Waiting for player...")
+    )(player);
+
     return (
         <div className={classNames.join(" ")}>
             <div className="player-with-faction__player">
                 <div className="player-with-faction__player-avatar" style={{backgroundImage: `url(${get("avatarUrl", player)})`}}/>
-                <div className="player-with-faction__player-name">{get("displayName", player)}</div>
+                <div className="player-with-faction__player-name">{playerName}</div>
             </div>
             <div className="player-with-faction__faction">
                 <Faction faction={faction} />
-                <div className="player-with-faction__faction-click-area">
+                <div className="player-with-faction__faction-click-area" onClick={onSelectFactionClick}>
                     <div className="player-with-faction__faction-click-text click-me-text"><span>Click to select faction</span></div>
                 </div>
             </div>

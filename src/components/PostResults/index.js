@@ -1,11 +1,10 @@
-import "./lobby-map.css";
+import "./post-results.css";
 
 import React from "react";
 import noop from "lodash/fp/noop";
-import {mapShape}from "../shapes";
-import MapPreview from "../MapPreview";
+import {playerShape} from "../shapes";
 
-const LobbyMap = ({scenario, canSelectMap = false, onSelectMapClick = noop}) => {
+const LobbyMap = ({victoryPoints, players, selectedPlayer, onWinnerSelected, onVictoryPointsChange, onContinueClick}) => {
     const classNames = ["lobby-map"];
 
     if (canSelectMap) {
@@ -14,7 +13,7 @@ const LobbyMap = ({scenario, canSelectMap = false, onSelectMapClick = noop}) => 
 
     return (
         <div className={classNames.join(" ")}>
-            <MapPreview scenario={scenario}/>
+            <PostResults scenario={scenario}/>
             <div className="lobby-map__click-area" onClick={onSelectMapClick}>
                 <div className="lobby-map__click-text click-me-text"><span>Click to select map</span></div>
             </div>
@@ -24,9 +23,12 @@ const LobbyMap = ({scenario, canSelectMap = false, onSelectMapClick = noop}) => 
 };
 
 LobbyMap.propTypes = {
-    scenario: mapShape,
-    canSelectMap: React.PropTypes.bool,
-    onSelectMapClick: React.PropTypes.func
+    victoryPoints: React.PropTypes.number.isRequired,
+    players: React.PropTypes.arrayOf(playerShape).isRequired,
+    selectedPlayer: playerShape,
+    onWinnerSelected: React.Component.func.isRequired,
+    onVictoryPointsChange: React.PropTypes.func.isRequired,
+    onContinueClick: React.PropTypes.func.isRequired
 };
 
 

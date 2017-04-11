@@ -8,11 +8,26 @@ import isNil from "lodash/fp/isNil";
 import LockTeamsButton from "../LockTeamsButton";
 import {lockTeams} from "../../actions/match-lobby";
 
-const canLockTeams = (matchId) => flow(
-    get(`matchLobbies.${matchId}.state.data.teams`),
-    flatten,
-    every(v => !isNil(v))
-);
+const isMatchOwner = (matchId) => (state) => {
+    const currentUserId = get("auth.user.id")(state);
+    const matchOwnerId = get(`matches.${matchId}.owner`)(state);
+
+    return currentUserId === matchOwnerId;
+};
+
+const canLockTeams = (matchId) => (state) => {
+    if (!isMatchOwner(matchId)(state)) {
+        return false;
+    }
+
+    const teamsFull = flow(
+        get(`matchLobbies.${matchId}.state.data.teams`),
+        flatten,
+        every(v => !isNil(v))
+    )(state);
+
+    return teamsFull;
+};
 
 const mapStateToProps = (state, {matchId}) => {
     return {

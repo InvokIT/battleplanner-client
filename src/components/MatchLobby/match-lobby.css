@@ -9,7 +9,7 @@
 
 .match-lobby .match-lobby__components {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
     align-items: flex-start;
 }
@@ -36,6 +36,15 @@
 }
 
 .match-lobby__state-description {
-    align-self: center;
-    margin-top:1em;
+    position:relative;
+    flex-grow: 1;
+    align-self: stretch;
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding-bottom:1em;
+}
+
+.match-lobby__state-description > * {
 }

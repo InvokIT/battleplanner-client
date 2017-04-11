@@ -129,7 +129,7 @@ const getMatchStateDescription = (matchId) => (state) => {
 
     const currentStateName = getMatchStateName(matchId)(state);
 
-    if (currentPlayer && currentStateName in matchStateDescriptions) {
+    if (currentStateName in matchStateDescriptions) {
         return matchStateDescriptions[currentStateName](currentPlayer);
     } else {
         return "";
