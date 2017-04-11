@@ -9,11 +9,14 @@
 }
 
 .lobby-map__title {
-    text-transform: uppercase;
+    display:none;
+    /*text-transform: uppercase;*/
     position:absolute;
-    top:-1.4em;
+    font-style: italic;
+    padding: 0 1em;
+    top:-1em;
     width:100%;
-    text-align: center;
+    /*text-align: center;*/
     font-size:1em;
 }
 
@@ -21,10 +24,10 @@
     content: "";
     position:absolute;
     left:0;
-    bottom:0.1em;
-    height:0.1em;
+    bottom:0.5em;
+    height:0.2em;
     width: 100%;
-    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
+    background: linear-gradient(to right, rgba(255,255,255,0.5), rgba(255,255,255,0));
 }
 
 .lobby-map__click-area {

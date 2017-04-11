@@ -1,0 +1,33 @@
+.footer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding:0.1em 4em 0.2em;
+    align-items: center;
+}
+
+.footer__text {
+    padding:0;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.footer__text span {
+    font-size:1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin:0;
+}
+
+.footer__text aside {
+    margin-left:1em;
+    font-size:0.6em;
+    font-style: italic;
+}
+
+
+
+.footer .paypal-button {
+
+}

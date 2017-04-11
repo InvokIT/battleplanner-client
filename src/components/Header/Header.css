@@ -1,34 +1,10 @@
 .header {
     align-self: stretch;
-    text-align: center;
     position: relative;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-}
-
-.header__text {
-    padding:0;
-    margin:0.5em 0 0;
-    display: flex;
-    flex-flow: row nowrap;
-}
-
-.header__text h1 {
-    font-size:2em;
-    font-weight: bold;
-    text-transform: uppercase;
-    justify-content: center;
     align-items: center;
-    margin:0;
-    padding-left:2em;
-}
-
-.header__text aside {
-    margin-left:1em;
-    font-size:0.6em;
-    font-style: italic;
-    padding-top:2em;
 }
 
 .header__current-user {
@@ -44,9 +20,11 @@
 }
 
 .header_gcs-logo {
-    position:absolute;
-    width:4em;
-    height:4em;
-    top:0.5em;
-    left:14em;
+    /*position:absolute;*/
+    margin:1em 0 -1em;
+    height:6em;
+    filter: drop-shadow(0 0 0.5em skyblue);
+    z-index:1;
+    /*top:0.5em;*/
+    /*left:14em;*/
 }
