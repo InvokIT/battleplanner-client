@@ -6,6 +6,7 @@ import get from "lodash/fp/get";
 import defaultTo from "lodash/fp/defaultTo";
 import {playerShape} from "../shapes";
 import PlayerWithFaction from "../PlayerWithFaction";
+import PlayerSelector from "../PlayerSelector";
 
 const getSelectedPlayerId = flow(
     get("id"),
@@ -24,6 +25,7 @@ const AssignableTeam = ({teamIndex, team, players, onPlayerSelected}) => (
                     ))}
                 </select>
 */}
+                <PlayerSelector players={players} onPlayerSelect={player => onPlayerSelected(slotIndex, player.id)}/>
                 <PlayerWithFaction player={selectedPlayer} />
             </div>
         ))}

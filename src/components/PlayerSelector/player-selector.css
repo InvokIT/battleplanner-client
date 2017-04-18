@@ -1,0 +1,31 @@
+.player-selector {
+    position: relative;
+    display: flex;
+}
+
+.team.team_0 .player-selector {
+    order: -10;
+}
+
+.team.team_1 .player-selector {
+    order: 10;
+}
+
+.player-selector .player-list {
+    position:absolute;
+    top:0;
+    background-color: rgba(120,120,120,1);
+    z-index: 100;
+    border: 0.1em solid rgba(0,0,0,0.5);
+    padding:0 0.5em 0 0;
+    cursor: pointer;
+}
+
+.team.team_0 .player-selector .player-list {
+    left:0;
+}
+
+.team.team_1 .player-selector .player-list {
+    right: 0;
+}
+

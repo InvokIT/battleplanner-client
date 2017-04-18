@@ -18,7 +18,7 @@ const AssignPlayersToTeams = ({matchId, stateDescription}) => (
             </div>
             <div className="match-lobby__state-description">
                 {/*<span>{stateDescription}</span>*/}
-                <span>Send the following link to your opponent:<br/><code>{window.location.href}</code></span>
+                <span>Send the following link to the players:<br/><code>{window.location.href}</code></span>
             </div>
         </div>
         <MatchRoundsContainer matchId={matchId}/>

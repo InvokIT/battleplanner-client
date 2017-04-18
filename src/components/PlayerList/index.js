@@ -7,7 +7,7 @@ import { playerShape } from "../shapes";
 const PlayerList = ({players = [], onPlayerClick}) => (
     <ul className="player-list">
         {players.map(player => (
-            <li onClick={onPlayerClick}>
+            <li key={player.id} onClick={(e) => onPlayerClick(player)}>
                 <Player displayName={player.displayName} avatarUrl={player.avatarUrl}/>
             </li>
         ))}
