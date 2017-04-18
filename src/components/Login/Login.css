@@ -18,10 +18,12 @@
     color: white;
     font-family: 'Oswald', sans-serif;
     cursor: pointer;
+    text-transform: none;
+    font-weight: normal;
 }
 
-.login-component__steam-button > * {
-
+.login-component__steam-button > img {
+    margin: 0.5em 0 0.5em 30px;
 }
 
 .login-component__steam-button aside {

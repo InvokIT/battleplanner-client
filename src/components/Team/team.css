@@ -1,10 +1,14 @@
 .match-lobby .team {
     width:auto;
-    padding:1em;
-    background-color: rgba(100,100,100,0.5);
-    border:2px solid black;
+    /*
+    padding: 1em;
+    background-color: rgba(100, 100, 100, 0.5);
+    border: 2px solid black;
+    */
     display:flex;
+    flex-flow: column nowrap;
     justify-content: flex-start;
+    align-items: stretch;
     flex-grow: 1;
     flex-basis: 0;
     position:relative;
@@ -18,8 +22,13 @@
     display:flex;
     align-items: center;
     flex-flow: row nowrap;
+    justify-content: flex-start;
 }
 
 .match-lobby .team.team_0 .team__slot {
+    justify-content: flex-end;
+}
 
+.match-lobby .team.team_0 .starting-positions {
+    justify-content: flex-end;
 }

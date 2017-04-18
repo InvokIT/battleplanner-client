@@ -11,11 +11,33 @@ import findIndex from "lodash/fp/findIndex";
 import includes from "lodash/fp/includes";
 import isNil from "lodash/fp/isNil";
 import Team from "../Team";
-import {factions} from "../../config";
+import {factions, maps} from "../../config";
 import {factionSelectorOpenAction} from "../../actions/match-lobby";
 
-const getTeam = (matchId, teamIndex) => (state) => {
-    const matchState = get(`matchLobbies.${matchId}.state.data`)(state);
+const getMatchState = (matchId) => get(`matchLobbies.${matchId}.state.data`);
+
+const getTeamSide = (matchId, teamIndex) => (state): string => {
+    const matchState: object = getMatchState(matchId)(state);
+    const currentRound: number = get("currentRound")(matchState);
+
+    // Get the first player on the team
+    const playerId = flow(
+        get(`teams[${teamIndex}]`),
+        find(p => !isNil(p))
+    )(matchState);
+
+    // Get that players faction and side
+    const factionId = get(`rounds[${currentRound}].factions[${playerId}]`)(matchState);
+    const side = flow(
+        find(f => f.id === factionId),
+        get("side")
+    )(factions);
+
+    return side;
+};
+
+const getTeam = (matchId, teamIndex) => (state): Array<{ player: object, faction: object }> => {
+    const matchState: object = getMatchState(matchId)(state);
     const currentRound = get("currentRound")(matchState);
 
     const players = flow(
@@ -47,7 +69,7 @@ const getTeam = (matchId, teamIndex) => (state) => {
     return players;
 };
 
-const canSelectFaction = (matchId, teamIndex) => (state) => {
+const canSelectFaction = (matchId, teamIndex) => (state): boolean => {
     const allowedStates = ["select-faction", "select-map-or-faction"];
 
     const currentTeam: number = get(`matchLobbies.${matchId}.state.data.currentTeam`)(state);
@@ -61,11 +83,25 @@ const canSelectFaction = (matchId, teamIndex) => (state) => {
     return teamOfUser === teamIndex && currentTeam === teamOfUser && includes(currentStateName, allowedStates);
 };
 
+const getStartingPositions = (matchId, teamIndex) => (state): ?Array<number> => {
+    const matchState: object = getMatchState(matchId)(state);
+    const currentRound: number = get("currentRound")(matchState);
+    const mapId: string = get(`rounds[${currentRound}].map`)(matchState);
+    const teamSide = getTeamSide(matchId, teamIndex)(state);
+    const startingPositions: ?Array<number> = flow(
+        find(m => m.id === mapId),
+        get(`startingPositions.${teamSide}`)
+    )(maps);
+
+    return startingPositions;
+};
+
 const mapStateToProps = (state, {matchId, teamIndex}) => {
     return {
         team: getTeam(matchId, teamIndex)(state),
         teamIndex: teamIndex,
-        canSelectFaction: canSelectFaction(matchId, teamIndex)(state)
+        canSelectFaction: canSelectFaction(matchId, teamIndex)(state),
+        startingPositions: getStartingPositions(matchId, teamIndex)(state)
     };
 };
 

@@ -10,7 +10,7 @@ const PaypalButton = () => (
 "/>
             <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif"
                    name="submit" alt="PayPal – The safer, easier way to pay online!"/>
-            <img alt="" border="0" src="https://www.paypalobjects.com/da_DK/i/scr/pixel.gif" width="1"
+            <img alt="" src="https://www.paypalobjects.com/da_DK/i/scr/pixel.gif" width="1"
                  height="1"/>
         </form>
     </div>

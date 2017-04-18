@@ -31,5 +31,4 @@ PlayGame.propTypes = {
     stateDescription: React.PropTypes.string.isRequired
 };
 
-
 export default PlayGame;
