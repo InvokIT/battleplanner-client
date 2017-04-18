@@ -73,3 +73,8 @@ export const loadMatch = (matchId: string) => async (dispatch: t_dispatch) => {
     const match = await invokeLoadMatches(matchId);
     dispatch(matchLoadedAction({match}));
 };
+
+export const togglePlayerList = (visible: ?boolean) => ({
+    type: "player-list-button_toggle-list",
+    visible: visible
+});

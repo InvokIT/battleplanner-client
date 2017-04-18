@@ -1,3 +1,5 @@
+import "./player.css";
+
 import React from "react";
 import UserAvatar from "../UserAvatar";
 

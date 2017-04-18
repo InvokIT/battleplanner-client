@@ -1,0 +1,10 @@
+.player {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.player__display-name {
+    margin: 0 0 0 1em;
+}

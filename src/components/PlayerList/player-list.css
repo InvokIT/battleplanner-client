@@ -1,0 +1,13 @@
+.player-list {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin:0;
+    padding:0;
+}
+
+.player-list li {
+    display: flex;
+    flex-flow: row nowrap;
+}
