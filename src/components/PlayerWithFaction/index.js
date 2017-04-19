@@ -21,7 +21,7 @@ const PlayerWithFaction = ({player, faction = missingFaction, canSelectFaction =
 
     const playerName = flow(
         get("displayName"),
-        defaultTo("Waiting for player...")
+        defaultTo("")
     )(player);
 
     return (

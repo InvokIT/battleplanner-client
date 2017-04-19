@@ -18,7 +18,7 @@ const MatchLobby = ({isAuthenticated, currentLocation, loading, matchId, matchSt
     }
 
     if (loading) {
-        return <Loading/>;
+        return <Loading text={"Connecting..."}/>;
     }
 
     switch (matchStateName) {
