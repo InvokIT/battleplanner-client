@@ -15,13 +15,15 @@ const Team = ({
                   startingPositions
               }) => (
     <div className={`team team_${teamIndex}`}>
-        {team.map((playerAndFaction, slotIndex) => (
-            <div key={slotIndex} className="team__slot">
-                <PlayerWithFaction player={playerAndFaction.player} faction={playerAndFaction.faction}
-                                   canSelectFaction={canSelectFaction} onSelectFactionClick={onSelectFactionClick}/>
-            </div>
-        ))}
-        <StartingPositions startingPositions={startingPositions} />
+        <div className="team__slots">
+            {team.map((playerAndFaction, slotIndex) => (
+                <div key={slotIndex} className="team__slot">
+                    <PlayerWithFaction player={playerAndFaction.player} faction={playerAndFaction.faction}
+                                       canSelectFaction={canSelectFaction} onSelectFactionClick={onSelectFactionClick}/>
+                </div>
+            ))}
+        </div>
+        <StartingPositions startingPositions={startingPositions}/>
     </div>
 );
 

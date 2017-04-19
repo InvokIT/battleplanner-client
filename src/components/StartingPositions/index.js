@@ -13,7 +13,7 @@ const StartingPositions = ({startingPositions} : {startingPositions: ?Array<numb
         <div className="starting-positions">
             <span className="starting-positions__title">Starting position</span>
             {startingPositions.map(startingPosition => (
-                <span className="starting-positions__value">{startingPosition}</span>
+                <span key={startingPosition} className="starting-positions__value">{startingPosition}</span>
             ))}
         </div>
     );

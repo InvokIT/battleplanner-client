@@ -1,8 +1,5 @@
 .match-lobby .team {
     width:auto;
-    padding: 1em;
-    background-color: rgba(100, 100, 100, 0.5);
-    border: 2px solid black;
     display:flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
@@ -10,6 +7,16 @@
     flex-grow: 1;
     flex-basis: 0;
     position:relative;
+}
+
+.team__slots {
+    padding: 0.5em;
+    background-color: rgba(100, 100, 100, 0.5);
+    border: 2px solid black;
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
 }
 
 .match-lobby .team.team_0 {

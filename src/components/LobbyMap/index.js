@@ -12,6 +12,9 @@ const LobbyMap = ({scenario, canSelectMap = false, onSelectMapClick = noop}) => 
         classNames.push("can-select-map")
     }
 
+    // TODO Placeholder when no map is selected yet
+    // TODO Preview with starting positions?
+
     return (
         <div className={classNames.join(" ")}>
             <MapPreview scenario={scenario}/>

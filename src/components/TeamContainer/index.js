@@ -10,6 +10,9 @@ import find from "lodash/fp/find";
 import findIndex from "lodash/fp/findIndex";
 import includes from "lodash/fp/includes";
 import isNil from "lodash/fp/isNil";
+import uniq from "lodash/fp/uniq";
+import first from "lodash/fp/first";
+import filter from "lodash/fp/filter";
 import Team from "../Team";
 import {factions, maps} from "../../config";
 import {factionSelectorOpenAction} from "../../actions/match-lobby";
@@ -19,21 +22,38 @@ const getMatchState = (matchId) => get(`matchLobbies.${matchId}.state.data`);
 const getTeamSide = (matchId, teamIndex) => (state): string => {
     const matchState: object = getMatchState(matchId)(state);
     const currentRound: number = get("currentRound")(matchState);
-
-    // Get the first player on the team
-    const playerId = flow(
-        get(`teams[${teamIndex}]`),
-        find(p => !isNil(p))
-    )(matchState);
-
-    // Get that players faction and side
-    const factionId = get(`rounds[${currentRound}].factions[${playerId}]`)(matchState);
-    const side = flow(
-        find(f => f.id === factionId),
-        get("side")
+    const teamSides = [null, null];
+    const sides = flow(
+        map(f => f.side),
+        uniq,
+        filter(s => !isNil(s))
     )(factions);
 
-    return side;
+    // Loop through teams and players, getting their faction and side
+    // When a faction is found, we can assume the side of each team
+    flow(
+        get("teams"),
+        teams => teams.forEach((team, ti) => {
+            team.forEach(playerId => {
+                const factionId = get(`rounds[${currentRound}].factions[${playerId}]`)(matchState);
+
+                if (!isNil(factionId)) {
+                    const side = flow(
+                        find(f => f.id === factionId),
+                        get("side")
+                    )(factions);
+
+                    teamSides[ti] = side;
+                    teamSides[(ti + 1) % 2] = flow(
+                        filter(s => s !== side),
+                        first
+                    )(sides);
+                }
+            });
+        })
+    )(matchState);
+
+    return teamSides[teamIndex];
 };
 
 const getTeam = (matchId, teamIndex) => (state): Array<{ player: object, faction: object }> => {
