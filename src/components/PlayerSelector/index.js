@@ -54,7 +54,7 @@ class PlayerSelector extends React.Component {
     render() {
         return (
             <div className="player-selector" ref={el => this.domElement = el}>
-                <button onClick={this.onAssignButtonClicked.bind(this)} title="Select player">...</button>
+                <button className="player-selector__button" onClick={this.onAssignButtonClicked.bind(this)} title="Select player"><span className="icon"/></button>
                 {this.state.showList ? <PlayerList players={this.props.players}
                                                    onPlayerClick={(player) => this.onPlayerClick(player)}/> : null }
             </div>

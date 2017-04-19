@@ -43,13 +43,13 @@ const onAuthFail = (dispatch) => {
 };
 
 
-export const loginWithSteam = (from) => (dispatch) => {
+export const login = (provider, from) => (dispatch) => {
     const apiOrigin = process.env.REACT_APP_API_ORIGIN;
 
     onAuthBegin(dispatch);
 
-    const windowSrc = `${apiOrigin}/auth/steam`;
-    const authWindow = window.open(windowSrc, "Steam Login", "centerscreen,width=1000,height=750,resizable,scrollbars,status");
+    const windowSrc = `${apiOrigin}/auth/${provider}`;
+    const authWindow = window.open(windowSrc, "Login", "centerscreen,width=1000,height=750,resizable,scrollbars,status");
 
     const onMessage = (event) => {
         const origin = event.origin || event.originalEvent.origin;

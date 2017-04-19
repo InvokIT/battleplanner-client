@@ -1,9 +1,14 @@
 .login-component {
     flex-grow: 1;
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+}
+
+.login-component__dev-button {
+    flex-grow: 0;
+    margin: 2em;
 }
 
 .login-component__steam-button {

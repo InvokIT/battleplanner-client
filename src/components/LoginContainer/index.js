@@ -1,7 +1,9 @@
+// @flow
+
 import { connect } from 'react-redux';
 import get from "lodash/fp/get";
 import Login from "../Login";
-import { loginWithSteam } from "../../actions/auth";
+import { login } from "../../actions/auth";
 
 const mapStateToProps = (state, {match}) => {
     return {
@@ -11,7 +13,7 @@ const mapStateToProps = (state, {match}) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onLoginClick: () => dispatch(loginWithSteam(get("location.state.from", ownProps)))
+        onLoginClick: (provider: string) => dispatch(login(provider, get("location.state.from", ownProps)))
     };
 };
 

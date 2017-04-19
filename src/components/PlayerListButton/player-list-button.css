@@ -14,7 +14,7 @@
 }
 
 .player-list-button__button {
-    background-image: url("./gfx/multy-user.svg");
+    background-image: url("../../gfx/multy-user.svg");
     background-color: white;
     background-size: 80%;
     background-repeat: no-repeat;
