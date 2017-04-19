@@ -17,6 +17,24 @@ class PlayerSelector extends React.Component {
         this.state = {
             showList: false
         };
+
+        this.onDocumentClicked = this.onDocumentClicked.bind(this);
+    }
+
+    componentDidMount() {
+        document.addEventListener("click", this.onDocumentClicked, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("click", this.onDocumentClicked, false);
+    }
+
+    onDocumentClicked(e) {
+        if (!this.domElement.contains(e.target)) {
+            this.setState({
+                showList: false
+            });
+        }
     }
 
     onAssignButtonClicked(e) {
@@ -35,9 +53,10 @@ class PlayerSelector extends React.Component {
 
     render() {
         return (
-            <div className="player-selector">
+            <div className="player-selector" ref={el => this.domElement = el}>
                 <button onClick={this.onAssignButtonClicked.bind(this)} title="Select player">...</button>
-                {this.state.showList ? <PlayerList players={this.props.players} onPlayerClick={(player) => this.onPlayerClick(player)}/> : null }
+                {this.state.showList ? <PlayerList players={this.props.players}
+                                                   onPlayerClick={(player) => this.onPlayerClick(player)}/> : null }
             </div>
         );
     }
