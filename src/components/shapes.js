@@ -20,7 +20,7 @@ export const mapShape = PropTypes.shape({
 
 export const roundShape = PropTypes.shape({
     map: mapShape,
-    winner: playerShape,
+    winner: playerAndFactionShape,
     winnerVictoryPoints: PropTypes.number
 });
 

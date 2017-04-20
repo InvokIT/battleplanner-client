@@ -85,21 +85,43 @@
     top:0;
     left:0;
     z-index:1;
-}
-
-.match-rounds .match-round .map-preview__image {
     filter: brightness(50%);
 }
 
-.match-rounds .match-round.match-round__current-round .map-preview__image {
+.match-rounds .match-round.match-round__current-round .map-preview {
     filter: brightness(100%);
 }
 
 .match-rounds .match-round__winner {
-    font-size:1.5em;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
     z-index: 2;
-    color: gold;
-    text-shadow: 0 0 1em goldenrod;
+}
+
+.match-rounds .match-round__winner-player {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    filter:drop-shadow(0 0 0.5em goldenrod);
+}
+
+.match-rounds .match-round__winner-player .faction {
+    font-size:0.5em;
+    margin:0 1em 0 0;
+}
+
+.match-rounds .match-round__winner-player .faction__image {
+    /*width:3em;*/
+    /*height:3em;*/
+}
+
+.match-rounds .match-round__winner-name {
+    font-size:1.2em;
+    color: white;
+    white-space: nowrap;
 }
 
 .match-rounds .match-round__victory-points {

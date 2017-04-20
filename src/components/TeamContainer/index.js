@@ -14,6 +14,7 @@ import uniq from "lodash/fp/uniq";
 import first from "lodash/fp/first";
 import filter from "lodash/fp/filter";
 import take from "lodash/fp/take";
+import isEmpty from "lodash/fp/isEmpty";
 import Team from "../Team";
 import {factions, maps} from "../../config";
 import {factionSelectorOpenAction} from "../../actions/match-lobby";
@@ -113,7 +114,8 @@ const getStartingPositions = (matchId, teamIndex) => (state): ?Array<number> => 
     const startingPositions: ?Array<number> = flow(
         find(m => m.id === mapId),
         get(`startingPositions.${teamSide}`),
-        take(teamSize)
+        take(teamSize),
+        sp => isEmpty(sp) ? null : sp
     )(maps);
 
     return startingPositions;
