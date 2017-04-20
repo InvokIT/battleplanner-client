@@ -1,8 +1,15 @@
 import React from "react";
 import { connect } from 'react-redux';
+import flow from "lodash/fp/flow";
+import includes from "lodash/fp/includes";
 import get from "lodash/fp/get";
 import PlayGameContinueButton from "../PlayGameContinueButton";
 import {continueAction} from "../../actions/match-lobby";
+
+const isMatchAdmin = flow(
+    get("auth.user.roles"),
+    includes("matchAdmin")
+);
 
 const isMatchOwner = (matchId) => (state) => {
     const currentUserId = get("auth.user.id")(state);
@@ -12,16 +19,7 @@ const isMatchOwner = (matchId) => (state) => {
 };
 
 const canContinue = (matchId) => (state) => {
-    const currentRound = get(`matchLobbies[${matchId}].state.data.currentRound`)(state);
-    if (currentRound > 0) {
-        return false;
-    }
-
-    if (!isMatchOwner(matchId)(state)) {
-        return false;
-    };
-
-    return true;
+    return isMatchAdmin(state) || isMatchOwner(matchId)(state);
 };
 
 const mapStateToProps = (state, {matchId}) => {

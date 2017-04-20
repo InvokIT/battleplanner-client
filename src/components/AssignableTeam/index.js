@@ -13,7 +13,7 @@ const getSelectedPlayerId = flow(
     defaultTo("")
 );
 
-const AssignableTeam = ({teamIndex, team, players, onPlayerSelected}) => (
+const AssignableTeam = ({teamIndex, team, players, onPlayerSelected, canAssignPlayers}) => (
     <div className={`team team_${teamIndex} team-assignable`}>
         {team.map((selectedPlayer, slotIndex) => (
             <div key={slotIndex} className="team__slot">
@@ -25,7 +25,7 @@ const AssignableTeam = ({teamIndex, team, players, onPlayerSelected}) => (
                     ))}
                 </select>
 */}
-                <PlayerSelector players={players} onPlayerSelect={player => onPlayerSelected(slotIndex, player.id)}/>
+                {canAssignPlayers ? <PlayerSelector players={players} onPlayerSelect={player => onPlayerSelected(slotIndex, player.id)}/> : null}
                 <PlayerWithFaction player={selectedPlayer} />
             </div>
         ))}
@@ -36,7 +36,8 @@ AssignableTeam.propTypes = {
     teamIndex: React.PropTypes.number.isRequired,
     team: React.PropTypes.arrayOf(playerShape).isRequired,
     players: React.PropTypes.arrayOf(playerShape).isRequired,
-    onPlayerSelected: React.PropTypes.func.isRequired
+    onPlayerSelected: React.PropTypes.func.isRequired,
+    canAssignPlayers: React.PropTypes.bool.isRequired
 };
 
 export default AssignableTeam;

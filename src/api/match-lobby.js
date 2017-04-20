@@ -53,7 +53,7 @@ class MatchLobbyApi {
     }
 
     assignPlayerToTeam(playerId: string, team: number, teamSlot: number): void {
-        this._sendStateChange("update-team-player-slot", {
+        return this._sendStateChange("update-team-player-slot", {
             team: team,
             teamSlot: teamSlot,
             playerId: isEmpty(playerId) ? null : playerId
@@ -61,39 +61,54 @@ class MatchLobbyApi {
     }
 
     lockTeams(): void {
-        this._sendStateChange("teams-complete");
+        return this._sendStateChange("teams-complete");
     }
 
     continue(): void {
-        this._sendStateChange("continue");
+        return this._sendStateChange("continue");
     }
 
     flipCoin(): void {
-        this._sendStateChange("choose-initiator", {
+        return this._sendStateChange("choose-initiator", {
             // TODO Move this to server-side
             team: Math.floor(Math.random() * 2)
         });
     }
 
     selectFaction(factionId): void {
-        this._sendStateChange("select-faction", {
+        return this._sendStateChange("select-faction", {
             faction: factionId
         });
     }
 
-    selectMap(mapId): void {
-        this._sendStateChange("select-map", {
+    selectMap(mapId: string): void {
+        return this._sendStateChange("select-map", {
             map: mapId
         });
     }
 
+    setResult(winnerTeam: number, winnerVictoryPoints: number): void {
+        return this._sendStateChange("setResult", {
+            winnerTeam,
+            winnerVictoryPoints
+        });
+    }
+
     _sendStateChange(name: string, params: ?Object): void {
-        this._withSocket(socket => {
-            socket.send(JSON.stringify({
-                type: "state-change",
-                name: name,
-                params: params
-            }));
+        return new Promise((resolve, reject) => {
+            this._withSocket(socket => {
+                try {
+                    socket.send(JSON.stringify({
+                        type: "state-change",
+                        name: name,
+                        params: params
+                    }));
+                    resolve();
+
+                } catch (err) {
+                    reject(err);
+                }
+            });
         });
     }
 

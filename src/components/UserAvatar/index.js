@@ -1,12 +1,14 @@
-import React from "react";
-import "./UserAvatar.css"
+import "./UserAvatar.css";
 
-const UserAvater = ({avatarUrl}) => (
+import React from "react";
+import defaultAvatar from "../../gfx/default-avatar.png";
+
+const UserAvater = ({avatarUrl = defaultAvatar}) => (
     <div className="user-avatar" style={{backgroundImage:`url(${avatarUrl})`}}></div>
 );
 
 UserAvater.propTypes = {
-    avatarUrl: React.PropTypes.string.isRequired
+    avatarUrl: React.PropTypes.string
 };
 
 export default UserAvater;

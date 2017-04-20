@@ -8,7 +8,7 @@ class PlayerSelector extends React.Component {
     static propTypes = {
         players: React.PropTypes.arrayOf(playerShape),
         onPlayerSelect: React.PropTypes.func.isRequired,
-        selectedPlayer: playerShape
+        selectedTeam: playerShape
     };
 
     constructor(props) {

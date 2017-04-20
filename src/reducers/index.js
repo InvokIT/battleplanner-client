@@ -6,3 +6,4 @@ export { default as users } from "./users";
 export { default as factionSelector} from "./faction-selector";
 export { default as mapSelector} from "./map-selector";
 export { default as playerListButton } from "./player-list-button";
+export { default as postResults } from "./post-results";
