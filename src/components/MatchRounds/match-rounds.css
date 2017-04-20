@@ -36,6 +36,10 @@
     border:2px solid black;
     margin:0.5em 0.75em;
     flex-grow: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 /*
@@ -76,10 +80,29 @@
     }
 }
 
+.match-rounds .match-round .map-preview {
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:1;
+}
+
 .match-rounds .match-round .map-preview__image {
     filter: brightness(50%);
 }
 
 .match-rounds .match-round.match-round__current-round .map-preview__image {
     filter: brightness(100%);
+}
+
+.match-rounds .match-round__winner {
+    font-size:1.5em;
+    z-index: 2;
+    color: gold;
+    text-shadow: 0 0 1em goldenrod;
+}
+
+.match-rounds .match-round__victory-points {
+    z-index: 2;
+    font-size: 0.8em;
 }

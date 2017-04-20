@@ -24,12 +24,21 @@ const MatchRounds = ({rounds, currentRoundNumber}) => (
                     itemClassNames.push("match-round__current-round");
                 }
 
+                const winnerName = get("winner.displayName", round);
+                const vps = get("winnerVictoryPoints", round);
+
                 return (
                     <div key={i} className={itemClassNames.join(" ")}>
                         <div className="match-round__number"><span>{i + 1}</span></div>
                         <MapPreview scenario={get("map", round)}/>
-                        <div className="match-round__winner">{get("winner.displayName", round)}</div>
-                        <div className="match-round__victory-points">{get("winnerVictoryPoints", round)}</div>
+                        {winnerName ? <div className="match-round__winner">{winnerName}</div> : null}
+                        {vps ?
+                            <div className="match-round__victory-points">
+                                <span>{vps}</span>
+                                <span>&nbsp;VPs</span>
+                            </div>
+                            : null
+                        }
                     </div>
                 );
             })}

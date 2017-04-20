@@ -10,9 +10,9 @@ import {maps} from "../../config"
 
 const getRounds = (matchId) => (state) => {
     const getTeamLeader = (teamNumber) => flow(
-        get(`matchLobbies.${matchId}.teams[${teamNumber}]`),
+        get(`matchLobbies.${matchId}.state.data.teams[${teamNumber}]`),
         head,
-        userId => get(`users[${userId}]`)(state)
+        userId => get(`users.${userId}`)(state)
     )(state);
 
     return flow(
