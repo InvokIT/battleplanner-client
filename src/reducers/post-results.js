@@ -15,6 +15,8 @@ export default (state = initialState, action) => {
             )(state);
         case "post-results_set-winner":
             return set("winnerTeam", action.winnerTeam)(state);
+        case "post-results_reset":
+            return initialState;
         default:
             return state;
     }

@@ -4,6 +4,7 @@ import get from "lodash/fp/get";
 import flatten from "lodash/fp/flatten";
 import MatchLobbyApi from "../api/match-lobby";
 import {loadUsers} from "./users";
+import {reset as resetPostResults} from "./post-results";
 
 type t_dispatch = (any) => void;
 
@@ -160,6 +161,7 @@ export const setResultAction = (matchId, winnerTeam, winnerVictoryPoints) => (di
     return withLobby(matchId, async (matchLobby) => {
         try {
             await matchLobby.setResult(winnerTeam, winnerVictoryPoints);
+            dispatch(resetPostResults());
         } catch (err) {
             // TODO Error handling
             console.log("Error while sending result. " + err.message);

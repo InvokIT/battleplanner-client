@@ -13,6 +13,7 @@ import isNil from "lodash/fp/isNil";
 import uniq from "lodash/fp/uniq";
 import first from "lodash/fp/first";
 import filter from "lodash/fp/filter";
+import take from "lodash/fp/take";
 import Team from "../Team";
 import {factions, maps} from "../../config";
 import {factionSelectorOpenAction} from "../../actions/match-lobby";
@@ -107,10 +108,12 @@ const getStartingPositions = (matchId, teamIndex) => (state): ?Array<number> => 
     const matchState: object = getMatchState(matchId)(state);
     const currentRound: number = get("currentRound")(matchState);
     const mapId: string = get(`rounds[${currentRound}].map`)(matchState);
-    const teamSide = getTeamSide(matchId, teamIndex)(state);
+    const teamSide: string = getTeamSide(matchId, teamIndex)(state);
+    const teamSize: number = get(`teams[${teamIndex}]`)(matchState).length;
     const startingPositions: ?Array<number> = flow(
         find(m => m.id === mapId),
-        get(`startingPositions.${teamSide}`)
+        get(`startingPositions.${teamSide}`),
+        take(teamSize)
     )(maps);
 
     return startingPositions;
