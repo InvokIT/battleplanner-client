@@ -14,7 +14,7 @@ const Player = ({displayName, avatarUrl}) => {
 
 Player.propTypes = {
     displayName: React.PropTypes.string.isRequired,
-    avatarUrl: React.PropTypes.string.isRequired
+    avatarUrl: React.PropTypes.string
 };
 
 export default Player;

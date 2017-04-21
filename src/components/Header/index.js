@@ -6,7 +6,7 @@ import gcsLogo from "../../config/gcs/gfx/gcs_logo.png";
 const Header = ({user}) => {
     return (
         <div className="header">
-            <img className="header_gcs-logo" src={gcsLogo} />
+            <img className="header_gcs-logo" src={gcsLogo} alt="Grand Championship Series Logo" />
             <LogoutButtonContainer />
         </div>
     );

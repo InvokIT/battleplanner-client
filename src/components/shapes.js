@@ -18,12 +18,6 @@ export const mapShape = PropTypes.shape({
     name: PropTypes.string.isRequired
 });
 
-export const roundShape = PropTypes.shape({
-    map: mapShape,
-    winner: playerAndFactionShape,
-    winnerVictoryPoints: PropTypes.number
-});
-
 export const factionShape = PropTypes.shape({
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired
@@ -32,5 +26,11 @@ export const factionShape = PropTypes.shape({
 export const playerAndFactionShape = PropTypes.shape({
     player: playerShape.isRequired,
     faction: factionShape.isRequired
+});
+
+export const roundShape = PropTypes.shape({
+    map: mapShape,
+    winner: playerAndFactionShape,
+    winnerVictoryPoints: PropTypes.number
 });
 

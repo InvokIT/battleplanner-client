@@ -4,10 +4,11 @@ import get from "lodash/fp/get";
 import flow from "lodash/fp/flow";
 import pick from "lodash/fp/pick";
 import values from "lodash/fp/values";
+import sortBy from "lodash/fp/sortBy";
 import PlayerListButton from "../PlayerListButton";
 import {togglePlayerList} from "../../actions/matches";
 
-const getMatchState = (matchId) => get(`matchLobbies.${matchId}.state.data`);
+// const getMatchState = (matchId) => get(`matchLobbies.${matchId}.state.data`);
 
 const getPlayers = (matchId) => (state) => {
     const playerIds = get(`matchLobbies.${matchId}.players`)(state);
@@ -15,7 +16,8 @@ const getPlayers = (matchId) => (state) => {
     return flow(
         get("users"),
         pick(playerIds),
-        values
+        values,
+        sortBy("displayName")
     )(state);
 };
 

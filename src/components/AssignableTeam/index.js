@@ -1,17 +1,9 @@
 import "./assignable-team.css";
 
 import React from "react";
-import flow from "lodash/fp/flow";
-import get from "lodash/fp/get";
-import defaultTo from "lodash/fp/defaultTo";
 import {playerShape} from "../shapes";
 import PlayerWithFaction from "../PlayerWithFaction";
 import PlayerSelector from "../PlayerSelector";
-
-const getSelectedPlayerId = flow(
-    get("id"),
-    defaultTo("")
-);
 
 const AssignableTeam = ({teamIndex, team, players, onPlayerSelected, canAssignPlayers}) => (
     <div className={`team team_${teamIndex} team-assignable`}>

@@ -1,7 +1,6 @@
 import "./post-results.css";
 
 import React from "react";
-import get from "lodash/fp/get";
 import isNil from "lodash/fp/isNil";
 import first from "lodash/fp/first";
 import Player from "../Player";
