@@ -7,20 +7,23 @@ import PlayerSelector from "../PlayerSelector";
 
 const AssignableTeam = ({teamIndex, team, players, onPlayerSelected, canAssignPlayers}) => (
     <div className={`team team_${teamIndex} team-assignable`}>
-        {team.map((selectedPlayer, slotIndex) => (
-            <div key={slotIndex} className="team__slot">
-{/*
-                <select className="player-selector" value={getSelectedPlayerId(selectedPlayer)} onChange={(e) => onPlayerSelected(slotIndex, e.target.value)}>
-                    <option value={""}>Assign player...</option>
-                    {players.map((player, i) => (
-                        <option key={i} value={player.id}>{player.displayName}</option>
-                    ))}
-                </select>
-*/}
-                {canAssignPlayers ? <PlayerSelector players={players} onPlayerSelect={player => onPlayerSelected(slotIndex, player.id)}/> : null}
-                <PlayerWithFaction player={selectedPlayer} />
-            </div>
-        ))}
+        <div className="team__slots">
+            {team.map((selectedPlayer, slotIndex) => (
+                <div key={slotIndex} className="team__slot">
+                    {/*
+                     <select className="player-selector" value={getSelectedPlayerId(selectedPlayer)} onChange={(e) => onPlayerSelected(slotIndex, e.target.value)}>
+                     <option value={""}>Assign player...</option>
+                     {players.map((player, i) => (
+                     <option key={i} value={player.id}>{player.displayName}</option>
+                     ))}
+                     </select>
+                     */}
+                    {canAssignPlayers ? <PlayerSelector players={players}
+                                                        onPlayerSelect={player => onPlayerSelected(slotIndex, player.id)}/> : null}
+                    <PlayerWithFaction player={selectedPlayer}/>
+                </div>
+            ))}
+        </div>
     </div>
 );
 
