@@ -18,7 +18,7 @@ const MatchOver = ({winner, showCreateMatch = false}) => {
                     <Player displayName={winnerName} avatarUrl={winnerAvatar}/>
                 </div>
             </div>
-            {showCreateMatch ? <CreateMatchContainer/> : null}
+            {/*{showCreateMatch ? <CreateMatchContainer/> : null}*/}
         </div>
     );
 };
