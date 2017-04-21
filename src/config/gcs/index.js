@@ -77,6 +77,12 @@ export const maps = [
 
 export const factions = [
     {
+        id: "soviet",
+        name: "Soviet Union",
+        image: factionSovietImage,
+        side: "allies"
+    },
+    {
         id: "usf",
         name: "US Forces",
         image: factionUsfImage,
@@ -93,12 +99,6 @@ export const factions = [
         name: "Wehrmacht Ostheer",
         image: factionOstheerImage,
         side: "axis"
-    },
-    {
-        id: "soviet",
-        name: "Soviet Union",
-        image: factionSovietImage,
-        side: "allies"
     },
     {
         id: "okw",
