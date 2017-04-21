@@ -2,6 +2,7 @@ import "./map-selector.css";
 
 import React from "react";
 import MapPreview from "../MapPreview";
+import MapMinimap from "../MapMinimap";
 import {mapShape} from "../shapes";
 
 const MapSelector = ({isVisible, maps, onMapSelected, onCancelClick}) => {
@@ -13,15 +14,16 @@ const MapSelector = ({isVisible, maps, onMapSelected, onCancelClick}) => {
 
     return (
         <div className="map-selector">
+            <div className="map-selector__title">Select a map</div>
             <div className="map-selector__items">
                 {maps.map(map => (
                     <div key={map.id} className="map-selector__item"
                          onClick={onMapSelected.bind(null, map)}>
                         <MapPreview scenario={map}/>
+                        <MapMinimap scenario={map}/>
                     </div>
                 ))}
             </div>
-            <div className="map-selector__title">Select a map</div>
             <div className="map-selector__cancel-button">
                 <button onClick={onCancelClick}>Cancel</button>
             </div>

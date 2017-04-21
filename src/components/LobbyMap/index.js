@@ -3,7 +3,6 @@ import "./lobby-map.css";
 import React from "react";
 import noop from "lodash/fp/noop";
 import {mapShape}from "../shapes";
-import MapPreview from "../MapPreview";
 import MapMinimap from "../MapMinimap";
 
 const LobbyMap = ({scenario, canSelectMap = false, onSelectMapClick = noop}) => {
@@ -14,7 +13,6 @@ const LobbyMap = ({scenario, canSelectMap = false, onSelectMapClick = noop}) => 
     }
 
     // TODO Placeholder when no map is selected yet
-    // TODO Preview with starting positions?
 
     return (
         <div className={classNames.join(" ")}>

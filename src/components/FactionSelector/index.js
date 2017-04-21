@@ -11,6 +11,7 @@ const FactionSelector = ({isVisible, factions, onFactionSelected, onCancelClick}
 
     return (
         <div className="faction-selector">
+            <div className="faction-selector__title">Select a faction</div>
             <div className="faction-selector__items">
                 {factions.map(faction => (
                     <div key={faction.id} className="faction-selector__item"
@@ -19,7 +20,6 @@ const FactionSelector = ({isVisible, factions, onFactionSelected, onCancelClick}
                     </div>
                 ))}
             </div>
-            <div className="faction-selector__title">Select a faction</div>
             <div className="faction-selector__cancel-button">
                 <button onClick={onCancelClick}>Cancel</button>
             </div>

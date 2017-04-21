@@ -12,7 +12,7 @@ const MapMinimap = ({scenario}) => (
 );
 
 MapMinimap.propTypes = {
-    scenario: mapShape.isRequired
+    scenario: mapShape
 };
 
 export default MapMinimap;
