@@ -3,9 +3,13 @@
     border: 0.1em solid black;
     background-color: rgba(100,100,100,0.5);
 
+    width:12em;
+    height:12em;
     /*16/9 aspect ratio*/
+    /*
     width: 20em;
     height:11.25em;
+    */
 }
 
 .lobby-map__title {

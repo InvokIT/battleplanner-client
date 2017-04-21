@@ -15,7 +15,8 @@ export const playerShape = PropTypes.shape({
 export const mapShape = PropTypes.shape({
     id: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    minimap: PropTypes.string.isRequired
 });
 
 export const factionShape = PropTypes.shape({

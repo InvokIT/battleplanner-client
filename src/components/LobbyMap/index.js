@@ -4,6 +4,7 @@ import React from "react";
 import noop from "lodash/fp/noop";
 import {mapShape}from "../shapes";
 import MapPreview from "../MapPreview";
+import MapMinimap from "../MapMinimap";
 
 const LobbyMap = ({scenario, canSelectMap = false, onSelectMapClick = noop}) => {
     const classNames = ["lobby-map"];
@@ -17,7 +18,7 @@ const LobbyMap = ({scenario, canSelectMap = false, onSelectMapClick = noop}) => 
 
     return (
         <div className={classNames.join(" ")}>
-            <MapPreview scenario={scenario}/>
+            <MapMinimap scenario={scenario}/>
             <div className="lobby-map__click-area" onClick={onSelectMapClick}>
                 <div className="lobby-map__click-text click-me-text"><span>Click to select map</span></div>
             </div>

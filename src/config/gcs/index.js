@@ -12,9 +12,13 @@ import find from "lodash/fp/find";
 import findIndex from "lodash/fp/findIndex";
 import includes from "lodash/fp/includes";
 import faymonvilleImage from "./gfx/faymonville_approach.jpg";
+import faymonvilleMinimap from "./gfx/faymonville_approach-minimap.jpg";
 import kholodnyImage from "./gfx/kholodny_ferma_summer.jpg";
+import kholodnyMinimap from "./gfx/kholodny_ferma_summer-minimap.jpg";
 import crossroadsImage from "./gfx/crossroads.jpg";
+import crossroadsMinimap from "./gfx/crossroads-minimap.jpg";
 import crossingInTheWoodsImage from "./gfx/crossing_in_the_woods.jpg";
+import crossingInTheWoodsMinimap from "./gfx/crossing_in_the_woods-minimap.jpg";
 import factionUsfImage from "./gfx/faction_aef.png";
 import factionUkfImage from "./gfx/faction_british.png";
 import factionOstheerImage from "./gfx/faction_german.png";
@@ -28,6 +32,7 @@ export const maps = [
     {
         id: "faymonville approach",
         image: faymonvilleImage,
+        minimap: faymonvilleMinimap,
         name: "Faymonville Approach",
         deciderPreference: 1,
         startingPositions: {
@@ -38,6 +43,7 @@ export const maps = [
     {
         id: "kholodny ferma summer",
         image: kholodnyImage,
+        minimap: kholodnyMinimap,
         name: "Kholodny Ferma (Summer)",
         deciderPreference: 2,
         startingPositions: {
@@ -48,6 +54,7 @@ export const maps = [
     {
         id: "crossroads",
         image: crossroadsImage,
+        minimap: crossroadsMinimap,
         name: "Crossroads",
         deciderPreference: 3,
         startingPositions: {
@@ -58,6 +65,7 @@ export const maps = [
     {
         id: "crossing in the woods",
         image: crossingInTheWoodsImage,
+        minimap: crossingInTheWoodsMinimap,
         name: "Crossing in the Woods",
         deciderPreference: 4,
         startingPositions: {
