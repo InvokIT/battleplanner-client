@@ -5,6 +5,7 @@ import get from "lodash/fp/get";
 import map from "lodash/fp/map";
 import remove from "lodash/fp/remove";
 import isNil from "lodash/fp/isNil";
+import includes from "lodash/fp/includes";
 import AssignableTeam from "../AssignableTeam";
 import {assignPlayerToTeam} from "../../actions/match-lobby";
 
@@ -21,11 +22,28 @@ const getPlayers = (matchId) => (state) =>
         remove(isNil)
     )(state);
 
+const isMatchAdmin = flow(
+    get("auth.user.roles"),
+    includes("matchAdmin")
+);
+
+const isMatchOwner = (matchId) => (state) => {
+    const currentUserId = get("auth.user.id")(state);
+    const matchOwnerId = get(`matches.${matchId}.owner`)(state);
+
+    return currentUserId === matchOwnerId;
+};
+
+const canAssignPlayers = (matchId) => (state) => {
+    return isMatchAdmin(state) || isMatchOwner(matchId)(state);
+};
+
 const mapStateToProps = (state, {matchId, teamIndex}) => {
     return {
         team: getTeam(matchId, teamIndex)(state),
         players: getPlayers(matchId)(state),
-        teamIndex: teamIndex
+        teamIndex: teamIndex,
+        canAssignPlayers: canAssignPlayers(matchId)(state)
     };
 };
 

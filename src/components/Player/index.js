@@ -1,3 +1,5 @@
+import "./player.css";
+
 import React from "react";
 import UserAvatar from "../UserAvatar";
 
@@ -10,9 +12,9 @@ const Player = ({displayName, avatarUrl}) => {
     );
 };
 
-Player.PropTypes = {
+Player.propTypes = {
     displayName: React.PropTypes.string.isRequired,
-    avatarUrl: React.PropTypes.string.isRequired
+    avatarUrl: React.PropTypes.string
 };
 
 export default Player;

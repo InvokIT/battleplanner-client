@@ -19,4 +19,5 @@
     font-size:1em;
     color:white;
     text-shadow: 0 0 0.05em black;
+    white-space: nowrap;
 }

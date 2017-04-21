@@ -29,25 +29,41 @@ export const maps = [
         id: "faymonville approach",
         image: faymonvilleImage,
         name: "Faymonville Approach",
-        deciderPreference: 1
+        deciderPreference: 1,
+        startingPositions: {
+            "allies": [1],
+            "axis": [2]
+        }
     },
     {
         id: "kholodny ferma summer",
         image: kholodnyImage,
         name: "Kholodny Ferma (Summer)",
-        deciderPreference: 2
+        deciderPreference: 2,
+        startingPositions: {
+            "allies": [1],
+            "axis": [2]
+        }
     },
     {
         id: "crossroads",
         image: crossroadsImage,
         name: "Crossroads",
-        deciderPreference: 3
+        deciderPreference: 3,
+        startingPositions: {
+            "allies": [1],
+            "axis": [2]
+        }
     },
     {
         id: "crossing in the woods",
         image: crossingInTheWoodsImage,
         name: "Crossing in the Woods",
-        deciderPreference: 4
+        deciderPreference: 4,
+        startingPositions: {
+            "allies": [1, 2],
+            "axis": [3, 4]
+        }
     }
 ];
 

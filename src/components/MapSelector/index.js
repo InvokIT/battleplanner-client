@@ -9,6 +9,8 @@ const MapSelector = ({isVisible, maps, onMapSelected, onCancelClick}) => {
         return null;
     }
 
+    // TODO Minimap preview?
+
     return (
         <div className="map-selector">
             <div className="map-selector__items">

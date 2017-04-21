@@ -1,4 +1,5 @@
 import React from "react";
+import PlayerListButtonContainer from "../PlayerListButtonContainer";
 import MatchRoundsContainer from "../MatchRoundsContainer";
 import TeamContainer from "../TeamContainer";
 import CoinFlipContainer from "../CoinFlipContainer"
@@ -6,6 +7,7 @@ import CoinFlipContainer from "../CoinFlipContainer"
 const ChooseInitiator = ({matchId, stateDescription}) => (
     <div className="app-content">
         <div className="match-lobby">
+            <PlayerListButtonContainer matchId={matchId}/>
             {/*<div className="match-lobby__title">{title}</div>*/}
             <div className="match-lobby__components">
                 <TeamContainer matchId={matchId} teamIndex={0}/>

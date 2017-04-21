@@ -11,6 +11,7 @@ import {ConnectedRouter, routerReducer, routerMiddleware} from 'react-router-red
 import { Redirect } from "react-router";
 import * as reducers from "./reducers";
 import HeaderContainer from "./components/HeaderContainer";
+import Footer from "./components/Footer";
 import { validate as validateAuth } from "./actions/auth";
 import LoginContainer from "./components/LoginContainer";
 import MatchBrowserContainer from "./components/MatchBrowserContainer";
@@ -41,6 +42,7 @@ const renderUi = () => {
                     <Route exact path="/matches" component={MatchBrowserContainer} />
                     <Route path="/matches/:matchId" component={MatchLobbyContainer} />
                     <Route path="/login" component={LoginContainer}/>
+                    <Footer/>
                 </div>
             </ConnectedRouter>
         </Provider>,

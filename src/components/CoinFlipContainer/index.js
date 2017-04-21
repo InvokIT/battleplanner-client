@@ -5,6 +5,7 @@ import get from "lodash/fp/get";
 import map from "lodash/fp/map";
 import defaultTo from "lodash/fp/defaultTo";
 import isNil from "lodash/fp/isNil";
+import includes from "lodash/fp/includes";
 import eq from "lodash/fp/eq";
 import CoinFlip from "../CoinFlip";
 import {flipCoinAction, flipCoinAnimationEndAction, continueAction} from "../../actions/match-lobby"
@@ -34,6 +35,11 @@ const isInitiatorSelected = (matchId) => flow(
     eq(false)
 );
 
+const isMatchAdmin = flow(
+    get("auth.user.roles"),
+    includes("matchAdmin")
+);
+
 const isMatchOwner = (matchId) => (state) => {
     const currentUserId = get("auth.user.id")(state);
     const matchOwnerId = get(`matches.${matchId}.owner`)(state);
@@ -42,11 +48,11 @@ const isMatchOwner = (matchId) => (state) => {
 };
 
 const canFlipCoin = (matchId) => (state) => {
-    return isMatchOwner(matchId)(state) && !isAnimating(matchId)(state) && !isInitiatorSelected(matchId)(state);
+    return (isMatchAdmin(state) || isMatchOwner(matchId)(state)) && !isAnimating(matchId)(state) && !isInitiatorSelected(matchId)(state);
 };
 
 const canContinue = (matchId) => (state) => {
-    return isMatchOwner(matchId)(state) && !isAnimating(matchId)(state) && isInitiatorSelected(matchId)(state);
+    return (isMatchAdmin(state) || isMatchOwner(matchId)(state)) && !isAnimating(matchId)(state) && isInitiatorSelected(matchId)(state);
 };
 
 const mapStateToProps = (state, {matchId}) => {

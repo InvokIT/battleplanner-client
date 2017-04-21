@@ -1,9 +1,14 @@
 .login-component {
     flex-grow: 1;
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+}
+
+.login-component__dev-button {
+    flex-grow: 0;
+    margin: 2em;
 }
 
 .login-component__steam-button {
@@ -18,10 +23,12 @@
     color: white;
     font-family: 'Oswald', sans-serif;
     cursor: pointer;
+    text-transform: none;
+    font-weight: normal;
 }
 
-.login-component__steam-button > * {
-
+.login-component__steam-button > img {
+    margin: 0.5em 0 0.5em 30px;
 }
 
 .login-component__steam-button aside {

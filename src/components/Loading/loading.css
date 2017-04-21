@@ -1,0 +1,9 @@
+.loading {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 2em;
+}

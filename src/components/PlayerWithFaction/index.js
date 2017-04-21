@@ -9,6 +9,7 @@ import flow from "lodash/fp/flow";
 import Faction from "../Faction";
 import {playerShape, factionShape} from "../shapes";
 import { factions } from "../../config";
+import defaultAvatar from "../../gfx/default-avatar.png";
 
 const missingFaction = find(f => f.id === "missing", factions);
 
@@ -21,13 +22,18 @@ const PlayerWithFaction = ({player, faction = missingFaction, canSelectFaction =
 
     const playerName = flow(
         get("displayName"),
-        defaultTo("Waiting for player...")
+        defaultTo("")
+    )(player);
+
+    const avatarUrl = flow(
+        get("avatarUrl"),
+        defaultTo(defaultAvatar)
     )(player);
 
     return (
         <div className={classNames.join(" ")}>
             <div className="player-with-faction__player">
-                <div className="player-with-faction__player-avatar" style={{backgroundImage: `url(${get("avatarUrl", player)})`}}/>
+                <div className="player-with-faction__player-avatar" style={{backgroundImage: `url(${avatarUrl})`}}/>
                 <div className="player-with-faction__player-name">{playerName}</div>
             </div>
             <div className="player-with-faction__faction">

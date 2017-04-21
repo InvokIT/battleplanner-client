@@ -5,8 +5,14 @@ import get from "lodash/fp/get";
 import flatten from "lodash/fp/flatten";
 import every from "lodash/fp/every";
 import isNil from "lodash/fp/isNil";
+import includes from "lodash/fp/includes";
 import LockTeamsButton from "../LockTeamsButton";
 import {lockTeams} from "../../actions/match-lobby";
+
+const isMatchAdmin = flow(
+    get("auth.user.roles"),
+    includes("matchAdmin")
+);
 
 const isMatchOwner = (matchId) => (state) => {
     const currentUserId = get("auth.user.id")(state);
@@ -16,10 +22,6 @@ const isMatchOwner = (matchId) => (state) => {
 };
 
 const canLockTeams = (matchId) => (state) => {
-    if (!isMatchOwner(matchId)(state)) {
-        return false;
-    }
-
     const teamsFull = flow(
         get(`matchLobbies.${matchId}.state.data.teams`),
         flatten,
@@ -29,9 +31,14 @@ const canLockTeams = (matchId) => (state) => {
     return teamsFull;
 };
 
+const hasLockRights = (matchId) => (state) => {
+    return isMatchOwner(matchId)(state) || isMatchAdmin(state);
+};
+
 const mapStateToProps = (state, {matchId}) => {
     return {
-        canLock: canLockTeams(matchId)(state)
+        canLock: canLockTeams(matchId)(state),
+        hasLockRights: hasLockRights(matchId)(state)
     };
 };
 

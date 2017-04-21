@@ -34,8 +34,12 @@
     height:8em;
     background-color: rgba(100,100,100,0.5);
     border:2px solid black;
-    margin:0.5em 0.75em 1.5em;
+    margin:0.5em 0.75em;
     flex-grow: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 /*
@@ -58,9 +62,11 @@
     border-radius: 50%;
     background-color: rgba(64,64,64,1);
     border: 2px solid black;
-    line-height:2em;
-    text-align: center;
     z-index: 2;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .match-rounds .match-round.match-round__current-round .match-round__number {
@@ -76,10 +82,51 @@
     }
 }
 
-.match-rounds .match-round .map-preview__image {
+.match-rounds .match-round .map-preview {
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:1;
     filter: brightness(50%);
 }
 
-.match-rounds .match-round.match-round__current-round .map-preview__image {
+.match-rounds .match-round.match-round__current-round .map-preview {
     filter: brightness(100%);
+}
+
+.match-rounds .match-round__winner {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.match-rounds .match-round__winner-player {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    filter:drop-shadow(0 0 0.5em goldenrod);
+}
+
+.match-rounds .match-round__winner-player .faction {
+    font-size:0.5em;
+    margin:0 1em 0 0;
+}
+
+.match-rounds .match-round__winner-player .faction__image {
+    /*width:3em;*/
+    /*height:3em;*/
+}
+
+.match-rounds .match-round__winner-name {
+    font-size:1.2em;
+    color: white;
+    white-space: nowrap;
+}
+
+.match-rounds .match-round__victory-points {
+    z-index: 2;
+    font-size: 0.8em;
 }

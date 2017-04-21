@@ -7,7 +7,8 @@ import AssignPlayersToTeams from "./AssignPlayersToTeams";
 import ChooseInitiator from "./ChooseInitiator";
 import SelectMapOrFaction from "./SelectMapOrFaction";
 import PlayGame from "./PlayGame";
-// import PostResultAndReplays from "./PostResultAndReplays";
+import PostResultsAndReplays from "./PostResultsAndReplays";
+import GameOver from "./GameOver";
 
 const MatchLobby = ({isAuthenticated, currentLocation, loading, matchId, matchStateName, matchStateDescription}) => {
     if (!isAuthenticated) {
@@ -18,7 +19,7 @@ const MatchLobby = ({isAuthenticated, currentLocation, loading, matchId, matchSt
     }
 
     if (loading) {
-        return <Loading/>;
+        return <Loading text={"Connecting..."}/>;
     }
 
     switch (matchStateName) {
@@ -40,10 +41,14 @@ const MatchLobby = ({isAuthenticated, currentLocation, loading, matchId, matchSt
             return (
                 <PlayGame matchId={matchId} stateDescription={matchStateDescription} />
             );
-        // case "post-result-and-replays":
-        //     return (
-        //         <PostResultAndReplays matchId={matchId} stateDescription={matchStateDescription} />
-        //     );
+        case "post-result-and-replays":
+            return (
+                <PostResultsAndReplays matchId={matchId} stateDescription={matchStateDescription} />
+            );
+        case "game-over":
+            return (
+                <GameOver matchId={matchId} stateDescription={matchStateDescription} />
+            );
         default:
             console.warn("Unknown match state");
             return <div>Unknown match state</div>;

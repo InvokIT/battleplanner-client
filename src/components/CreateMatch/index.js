@@ -3,9 +3,9 @@ import './CreateMatch.css';
 
 const CreateMatch = ({name, buttonDisabled, onNameChange, onCreateMatch}) => {
     return (
-        <form onSubmit={onCreateMatch}>
+        <form className="create-match" onSubmit={onCreateMatch}>
             <input type="hidden" placeholder="Match name" value={name} onChange={onNameChange} />
-            <button type="submit" className="create-match-button" disabled={buttonDisabled}>Create new match</button>
+            <button type="submit" className="create-match__button" disabled={buttonDisabled}>Create new match</button>
         </form>
     );
 };

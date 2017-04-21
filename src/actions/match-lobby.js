@@ -4,6 +4,7 @@ import get from "lodash/fp/get";
 import flatten from "lodash/fp/flatten";
 import MatchLobbyApi from "../api/match-lobby";
 import {loadUsers} from "./users";
+import {reset as resetPostResults} from "./post-results";
 
 type t_dispatch = (any) => void;
 
@@ -17,7 +18,7 @@ const withLobby = (matchId: string, fn: (MatchLobbyApi) => void) => {
         return;
     }
 
-    fn(matchLobby);
+    return fn(matchLobby);
 };
 
 const matchLobbyConnectingAction = (matchId) => ({
@@ -74,27 +75,27 @@ export const connectToMatch = (matchId: string) => async (dispatch: t_dispatch) 
 };
 
 export const disconnectFromMatch = (matchId: string) => (dispatch: t_dispatch) => {
-    withLobby(matchId, (matchLobby) => {
+    return withLobby(matchId, (matchLobby) => {
         matchLobbies.delete(matchId);
         matchLobby.close();
     });
 };
 
 export const assignPlayerToTeam = (matchId: string, playerId: string, team: number, teamSlot: number) => (dispatch: t_dispatch) => {
-    withLobby(matchId, matchLobby => {
+    return withLobby(matchId, matchLobby => {
         matchLobby.assignPlayerToTeam(playerId, team, teamSlot);
     });
 };
 
 export const lockTeams = (matchId: string) => (dispatch: t_dispatch) => {
-    withLobby(matchId, matchLobby => {
+    return withLobby(matchId, matchLobby => {
         matchLobby.lockTeams();
     });
 
 };
 
 export const continueAction = (matchId: string) => (dispatch: t_dispatch) => {
-    withLobby(matchId, (matchLobby) => {
+    return withLobby(matchId, (matchLobby) => {
         matchLobby.continue();
     });
 };
@@ -110,7 +111,7 @@ export const flipCoinAnimationEndAction = (matchId: string) => ({
 });
 
 export const flipCoinAction = (matchId: string) => (dispatch: t_dispatch) => {
-    withLobby(matchId, (matchLobby) => {
+    return withLobby(matchId, (matchLobby) => {
         matchLobby.flipCoin();
         dispatch(flipCoinAnimationStartAction(matchId));
     });
@@ -125,7 +126,7 @@ export const factionSelectorCloseAction = () => ({
 });
 
 export const selectFactionAction = (matchId, faction) => (dispatch) => {
-    withLobby(matchId, async (matchLobby) => {
+    return withLobby(matchId, async (matchLobby) => {
         try {
             await matchLobby.selectFaction(faction.id);
             dispatch(factionSelectorCloseAction());
@@ -145,13 +146,25 @@ export const mapSelectorCloseAction = () => ({
 });
 
 export const selectMapAction = (matchId, map) => (dispatch) => {
-    withLobby(matchId, async (matchLobby) => {
+    return withLobby(matchId, async (matchLobby) => {
         try {
             await matchLobby.selectMap(map.id);
             dispatch(mapSelectorCloseAction());
         } catch (err) {
             // TODO Error handling
             console.log("Error while selecting map. " + err.message);
+        }
+    });
+};
+
+export const setResultAction = (matchId, winnerTeam, winnerVictoryPoints) => (dispatch) => {
+    return withLobby(matchId, async (matchLobby) => {
+        try {
+            await matchLobby.setResult(winnerTeam, winnerVictoryPoints);
+            dispatch(resetPostResults());
+        } catch (err) {
+            // TODO Error handling
+            console.log("Error while sending result. " + err.message);
         }
     });
 };

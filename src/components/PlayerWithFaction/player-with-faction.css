@@ -1,8 +1,16 @@
 .player-with-faction {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: flex-end;
     align-items: center;
+    flex-grow: 1;
+}
+
+.team.team_0 .player-with-faction {
+    justify-content: flex-end;
+}
+
+.team.team_1 .player-with-faction {
+    justify-content: flex-start;
 }
 
 .player-with-faction__faction {
@@ -36,7 +44,7 @@
 }
 
 .player-with-faction__player {
-    margin:0 0em;
+    margin:0 1em;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;

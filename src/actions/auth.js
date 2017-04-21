@@ -1,4 +1,4 @@
-import { push as pushLocation } from "react-router-redux";
+import {push as pushLocation} from "react-router-redux";
 import jwtDecode from "jwt-decode";
 import jwtStore from "../jwt-store";
 import invokeAuthValidate from "../api/auth/validate";
@@ -43,31 +43,31 @@ const onAuthFail = (dispatch) => {
 };
 
 
-export const loginWithSteam = (from) => (dispatch) => {
+export const login = (provider, from) => (dispatch) => {
     const apiOrigin = process.env.REACT_APP_API_ORIGIN;
 
     onAuthBegin(dispatch);
 
-    const windowSrc = `${apiOrigin}/auth/steam`;
-    const authWindow = window.open(windowSrc, "Steam Login", "centerscreen,width=1000,height=750,resizable,scrollbars,status");
+    const windowSrc = `${apiOrigin}/auth/${provider}`;
+    const authWindow = window.open(windowSrc, "Login", "centerscreen,width=1000,height=750,resizable,scrollbars,status");
 
     const onMessage = (event) => {
         const origin = event.origin || event.originalEvent.origin;
         const originRegexp = new RegExp(`^\\w+:${apiOrigin}`);
 
-        if (originRegexp.test(origin)) {
-            const msg = event.data;
-            if (msg.type === "auth-response") {
+        const msg = event.data;
+        if (msg.type === "auth-response") {
+            if (originRegexp.test(origin)) {
                 window.removeEventListener("message", onMessage, false);
                 authWindow.close();
                 onAuthSuccess(dispatch, msg.value);
 
                 dispatch(pushLocation(from ? from : "/matches"));
+            } else {
+                onAuthFail(dispatch);
+                //TODO log
+                throw new Error("Received message from unauthorized origin: " + origin);
             }
-        } else {
-            onAuthFail(dispatch);
-            //TODO log
-            throw new Error("Received message from unauthorized origin: " + origin);
         }
     };
 

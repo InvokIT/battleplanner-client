@@ -1,6 +1,7 @@
 import "./coin-flip.css";
 
 import React from "react";
+import defaultAvatar from "../../gfx/default-avatar.png";
 
 const filterAnimationEvents = (handler) => (event) => {
     switch (event.animationName) {
@@ -16,16 +17,19 @@ const CoinFlip = ({faces, canFlipCoin, canContinue, onFlipCoinButtonClick, onFli
     <div className="coin-flip">
         <div className={`coin coin__result-${winnerFaceIndex}`}
              onAnimationEnd={filterAnimationEvents(onFlipCoinAnimationEnd)}>
-            {faces.map((face, i) => (
-                <div key={i} className={`coin-face coin-face_${i}`}>
-                    <div className="coin-face__image" style={{backgroundImage: `url(${face.image})`}}/>
-                    <span className="coin-face__name">{face.name}</span>
-                </div>
-            ))}
+            {faces.map((face, i) => {
+                const faceImage = face.image || defaultAvatar;
+                return (
+                    <div key={i} className={`coin-face coin-face_${i}`}>
+                        <div className="coin-face__image" style={{backgroundImage: `url(${faceImage})`}}/>
+                        <span className="coin-face__name">{face.name}</span>
+                    </div>
+                );
+            })}
         </div>
         <div className="button-group vertical">
-            <button className="coin-flip__flip-button" onClick={onFlipCoinButtonClick} disabled={!canFlipCoin}>Spin</button>
-            <button className="coin-flip__continue-button" onClick={onContinueButtonClick} disabled={!canContinue}>Continue</button>
+            {canFlipCoin ? <button className="coin-flip__flip-button" onClick={onFlipCoinButtonClick}>Spin</button> : null}
+            {canContinue ? <button className="coin-flip__continue-button" onClick={onContinueButtonClick}>Continue</button> : null}
         </div>
     </div>
 );

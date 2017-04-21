@@ -1,0 +1,104 @@
+.post-results {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.post-results__dialog {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color:rgba(100,100,100,0.5);
+    padding:1em;
+    position: relative;
+    align-self: stretch;
+}
+
+.post-results__dialog::before, .post-results__dialog::after {
+    content: "";
+    position:absolute;
+    left:0;
+    height:0.1em;
+    width: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
+}
+
+.post-results__dialog::before {
+    top:0;
+}
+
+.post-results__dialog::after {
+    bottom:0;
+}
+
+.post-results__title {
+    position:absolute;
+    top:-1.2em;
+    text-transform: uppercase;
+}
+
+.post-results__teams {
+    display: flex;
+    flex-flow: row nowrap;
+    perspective: 10em;
+    perspective-origin: center center;
+}
+
+.post-results__team {
+    will-change: transform, filter;
+    transition: transform 500ms, filter 500ms;
+    filter:drop-shadow(0 0 0 goldenrod) brightness(100%);
+    cursor: pointer;
+    margin:0.5em 0.5em;
+    font-size: 1.5em;
+    transform: translate3d(0, 0, -2em);
+}
+
+.post-results__team:first-child.post-results__team_selected {
+    transform: translate3d(1.5em, 0, 0);
+}
+
+.post-results__team:last-child.post-results__team_selected {
+    transform: translate3d(-1.5em, 0, 0);
+}
+
+.post-results__team_selected {
+    filter:drop-shadow(0 0 0.2em goldenrod) brightness(150%);
+    z-index:2;
+}
+
+.post-results__team_not-selected {
+    filter: grayscale(50%);
+    z-index:1;
+}
+
+.post-results__team:first-child.post-results__team_not-selected {
+    /*transform: translate3d(1em, 0, -2em);*/
+}
+
+.post-results__team:last-child.post-results__team_not-selected {
+    /*transform: translate3d(-1em, 0, -2em);*/
+}
+
+.post-results__team:first-child .player .player__display-name {
+    order: -1;
+    margin:0 1em 0 0;
+}
+
+.post-results__victory-points {
+
+}
+
+.post-results__submit-button {
+    margin: 2em;
+    flex-grow: 0;
+}

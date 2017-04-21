@@ -6,11 +6,7 @@ import gcsLogo from "../../config/gcs/gfx/gcs_logo.png";
 const Header = ({user}) => {
     return (
         <div className="header">
-            <img className="header_gcs-logo" src={gcsLogo} />
-            <div className="header__text">
-                <h1>Battle Planner</h1>
-                <aside>by InvokIT LTD</aside>
-            </div>
+            <img className="header_gcs-logo" src={gcsLogo} alt="Grand Championship Series Logo" />
             <LogoutButtonContainer />
         </div>
     );

@@ -85,7 +85,6 @@ button {
 }
 
 button:disabled {
-    display:none;
     color: rgba(255, 255, 255, 0.5);
     cursor: default;
     box-shadow: none;
@@ -130,4 +129,17 @@ button:disabled {
         color: white;
         transform:rotate(-2deg);
     }
+}
+
+input[type=text], input[type=number] {
+    background-color: transparent;
+    font-family: 'Oswald', sans-serif;
+    font-size:1em;
+    position:relative;
+    color: white;
+    margin:0 0.2em;
+    padding:0;
+    border:dashed rgba(255,255,255,0.5);
+    border-width: 0 0 0.1em 0;
+    text-align:center;
 }

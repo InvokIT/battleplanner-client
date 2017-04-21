@@ -1,5 +1,5 @@
 const initialState = {
-    name: "alpha match"
+    name: "GCS match v1"
 };
 
 export default (state = initialState, action) => {
