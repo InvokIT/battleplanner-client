@@ -62,13 +62,22 @@ const canContinue = (state) => {
     return !isNil(getSelectedTeam(state));
 };
 
+const isLastRound = (matchId) => (state) => {
+    const matchState = getMatchState(matchId);
+    const currentRound = get("currentRound")(matchState);
+    const roundCount = get("rounds").length;
+
+    return currentRound === roundCount - 1;
+};
+
 const mapStateToProps = (state, {matchId}) => {
     return {
         canPostResults: canPostResults(matchId)(state),
         canContinue: canContinue(state),
         victoryPoints: getVictoryPoints(state),
         teams: getTeams(matchId)(state),
-        selectedTeam: getSelectedTeam(state)
+        selectedTeam: getSelectedTeam(state),
+        hideVictoryPoints: isLastRound(matchId)(state)
     };
 };
 

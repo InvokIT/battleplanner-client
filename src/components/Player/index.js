@@ -12,7 +12,7 @@ const Player = ({displayName, avatarUrl}) => {
     );
 };
 
-Player.PropTypes = {
+Player.propTypes = {
     displayName: React.PropTypes.string.isRequired,
     avatarUrl: React.PropTypes.string.isRequired
 };

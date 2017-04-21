@@ -25,6 +25,7 @@ const getRounds = (matchId) => (state) => {
                     player: winnerPlayer,
                     faction: factions.find(f => f.id === r.factions[winnerPlayer.id])
                 } : null,
+                loser: null,
                 winnerVictoryPoints: r.winnerVictoryPoints
             }
         })

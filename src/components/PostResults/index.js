@@ -7,7 +7,7 @@ import first from "lodash/fp/first";
 import Player from "../Player";
 import {playerShape} from "../shapes";
 
-const PostResults = ({canPostResults, canContinue, victoryPoints, teams, selectedTeam, onWinnerSelected, onVictoryPointsChange, onContinueClick}) => {
+const PostResults = ({canPostResults, canContinue, victoryPoints, teams, selectedTeam, onWinnerSelected, onVictoryPointsChange, onContinueClick, hideVictoryPoints = false}) => {
     if (!canPostResults) {
         return null;
     }
@@ -37,19 +37,21 @@ const PostResults = ({canPostResults, canContinue, victoryPoints, teams, selecte
                         )
                     })}
                 </div>
-                <div className="post-results__victory-points">
-                    <label>
-                        <span>with</span>
-                        <input
-                            type="number"
-                            min="1"
-                            max="500"
-                            value={victoryPoints}
-                            onChange={e => onVictoryPointsChange(e.target.value)}
-                            autoComplete="off"/>
-                        <span>Victory Points</span>
-                    </label>
-                </div>
+                {hideVictoryPoints ? null :
+                    <div className="post-results__victory-points">
+                        <label>
+                            <span>with</span>
+                            <input
+                                type="number"
+                                min="1"
+                                max="500"
+                                value={victoryPoints}
+                                onChange={e => onVictoryPointsChange(e.target.value)}
+                                autoComplete="off"/>
+                            <span>Victory Points</span>
+                        </label>
+                    </div>
+                }
             </div>
             <button className="post-results__submit-button" onClick={e => onContinueClick(selectedTeam, victoryPoints)} disabled={!canContinue}>
                 <span>Submit</span>
@@ -66,7 +68,8 @@ PostResults.propTypes = {
     selectedTeam: React.PropTypes.number,
     onWinnerSelected: React.PropTypes.func.isRequired,
     onVictoryPointsChange: React.PropTypes.func.isRequired,
-    onContinueClick: React.PropTypes.func.isRequired
+    onContinueClick: React.PropTypes.func.isRequired,
+    hideVictoryPoints: React.PropTypes.bool
 };
 
 

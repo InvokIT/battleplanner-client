@@ -62,9 +62,11 @@
     border-radius: 50%;
     background-color: rgba(64,64,64,1);
     border: 2px solid black;
-    line-height:2em;
-    text-align: center;
     z-index: 2;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .match-rounds .match-round.match-round__current-round .match-round__number {

@@ -3,8 +3,7 @@ import "./select-map-or-faction.css";
 import React from "react";
 import PlayerListButtonContainer from "../PlayerListButtonContainer";
 import MatchRoundsContainer from "../MatchRoundsContainer";
-import TeamContainer from "../TeamContainer";
-// import MatchOverContainer from "../MatchOverContainer";
+import MatchOverContainer from "../MatchOverContainer";
 
 const GameOver = ({matchId, stateDescription}) => (
     <div className="app-content">
@@ -12,11 +11,7 @@ const GameOver = ({matchId, stateDescription}) => (
             <PlayerListButtonContainer matchId={matchId}/>
             {/*<div className="match-lobby__title">{title}</div>*/}
             <div className="match-lobby__components">
-                <TeamContainer matchId={matchId} teamIndex={0}/>
-                <div className="match-lobby_center-component">
-                    {/*<MatchOverContainer matchId={matchId} />*/}
-                </div>
-                <TeamContainer matchId={matchId} teamIndex={1}/>
+                <MatchOverContainer matchId={matchId} />
             </div>
             <div className="match-lobby__state-description"><span>{stateDescription}</span></div>
         </div>
