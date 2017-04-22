@@ -22,6 +22,8 @@ const CoinFlip = ({faces, canFlipCoin, canContinue, onFlipCoinButtonClick, onFli
                 return (
                     <div key={i} className={`coin-face coin-face_${i}`}>
                         <div className="coin-face__image" style={{backgroundImage: `url(${faceImage})`}}/>
+                        <svg className="coin-face__name">
+                        </svg>
                         <span className="coin-face__name">{face.name}</span>
                     </div>
                 );
