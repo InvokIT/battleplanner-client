@@ -19,6 +19,11 @@ import Team from "../Team";
 import {factions, maps} from "../../config";
 import {factionSelectorOpenAction} from "../../actions/match-lobby";
 
+const isMatchAdmin = flow(
+    get("auth.user.roles"),
+    includes("matchAdmin")
+);
+
 const getMatchState = (matchId) => get(`matchLobbies.${matchId}.state.data`);
 
 const getTeamSide = (matchId, teamIndex) => (state): string => {
@@ -102,7 +107,7 @@ const canSelectFaction = (matchId, teamIndex) => (state): boolean => {
         findIndex(t => includes(currentUserId, t))
     )(state);
 
-    return teamOfUser === teamIndex && currentTeam === teamOfUser && includes(currentStateName, allowedStates);
+    return ((teamOfUser === teamIndex && currentTeam === teamOfUser) || isMatchAdmin(state)) && includes(currentStateName, allowedStates);
 };
 
 const getStartingPositions = (matchId, teamIndex) => (state): ?Array<number> => {
