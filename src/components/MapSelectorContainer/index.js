@@ -8,10 +8,10 @@ import {selectMapAction, mapSelectorCloseAction} from "../../actions/match-lobby
 const isVisible = get("mapSelector.isOpen");
 
 const getMaps = (matchId) => (state) => {
-    const lobby = get(`matchLobbies.${matchId}`)(state);
+    const matchState = get(`matchLobbies.${matchId}.state.data`)(state);
     const userId = get("auth.user.id")(state);
 
-    return getSelectableMaps(lobby, userId);
+    return getSelectableMaps(matchState, userId);
 };
 
 const mapStateToProps = (state, {matchId}) => {

@@ -172,5 +172,12 @@ export const getSelectableFactions = (matchLobby, playerId) => {
 };
 
 export const getSelectableMaps = (matchState, playerId) => {
-    return maps;
+    // Only allow selection of maps not played yet
+    const playedMapIds = flow(
+        get("rounds"),
+        map(round => round.map),
+        filter(mapId => !isNil(mapId))
+    )(matchState);
+
+    return filter(map => !playedMapIds.includes(map.id))(maps);
 };
