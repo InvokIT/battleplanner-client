@@ -37,3 +37,9 @@
 .match-lobby .team.team_0 .starting-positions {
     justify-content: flex-end;
 }
+
+.match-lobby .team .player-with-faction__player-name {
+    max-width:7em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

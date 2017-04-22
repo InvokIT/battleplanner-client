@@ -84,8 +84,11 @@
 .coin .coin-face .coin-face__name {
     margin:0.25em;
     font-size: 1.4em;
-    text-shadow: black 0 0 0.05em;
+    text-shadow: black 0 0 0.1em;
     white-space: nowrap;
+    max-width:6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .coin .coin-face.coin-face_0 {

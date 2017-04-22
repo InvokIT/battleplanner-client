@@ -124,6 +124,9 @@
     font-size:1.2em;
     color: white;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width:6em;
 }
 
 .match-rounds .match-round__victory-points {
