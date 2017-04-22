@@ -9,21 +9,26 @@ const isVisible = get("factionSelector.isOpen");
 
 const getFactions = (matchId) => (state) => {
     const lobby = get(`matchLobbies.${matchId}`)(state);
-    const userId = get("auth.user.id")(state);
+    const playerId = getPlayerId(state);
 
-    return getSelectableFactions(lobby, userId);
+    return getSelectableFactions(lobby, playerId);
 };
 
+const getPlayerId = get("factionSelector.playerId");
+
 const mapStateToProps = (state, {matchId}) => {
+    const playerId = getPlayerId(state);
+
     return {
         isVisible: isVisible(state),
-        factions: getFactions(matchId)(state)
+        factions: getFactions(matchId)(state),
+        playerId: playerId
     };
 };
 
 const mapDispatchToProps = (dispatch, {matchId}) => {
     return {
-        onFactionSelected: (faction) => dispatch(selectFactionAction(matchId, faction)),
+        onFactionSelected: (playerId, faction) => dispatch(selectFactionAction(matchId, playerId, faction)),
         onCancelClick: () => dispatch(factionSelectorCloseAction())
     };
 };

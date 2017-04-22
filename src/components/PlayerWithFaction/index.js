@@ -38,7 +38,7 @@ const PlayerWithFaction = ({player, faction = missingFaction, canSelectFaction =
             </div>
             <div className="player-with-faction__faction">
                 <Faction faction={faction} />
-                <div className="player-with-faction__faction-click-area" onClick={onSelectFactionClick}>
+                <div className="player-with-faction__faction-click-area" onClick={e => onSelectFactionClick(player.id)}>
                     <div className="player-with-faction__faction-click-text click-me-text"><span>Click to select faction</span></div>
                 </div>
             </div>

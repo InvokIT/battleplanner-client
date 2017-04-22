@@ -4,7 +4,7 @@ import React from "react";
 import Faction from "../Faction";
 import {factionShape} from "../shapes";
 
-const FactionSelector = ({isVisible, factions, onFactionSelected, onCancelClick}) => {
+const FactionSelector = ({isVisible, playerId, factions, onFactionSelected, onCancelClick}) => {
     if (!isVisible) {
         return null;
     }
@@ -15,7 +15,7 @@ const FactionSelector = ({isVisible, factions, onFactionSelected, onCancelClick}
             <div className="faction-selector__items">
                 {factions.map(faction => (
                     <div key={faction.id} className="faction-selector__item"
-                         onClick={onFactionSelected.bind(null, faction)}>
+                         onClick={onFactionSelected.bind(null, playerId, faction)}>
                         <Faction faction={faction}/>
                     </div>
                 ))}
@@ -30,6 +30,7 @@ const FactionSelector = ({isVisible, factions, onFactionSelected, onCancelClick}
 FactionSelector.propTypes = {
     isVisible: React.PropTypes.bool.isRequired,
     factions: React.PropTypes.arrayOf(factionShape).isRequired,
+    playerId: React.PropTypes.string,
     onFactionSelected: React.PropTypes.func.isRequired,
     onCancelClick: React.PropTypes.func.isRequired
 };

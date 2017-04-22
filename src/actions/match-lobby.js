@@ -117,18 +117,19 @@ export const flipCoinAction = (matchId: string) => (dispatch: t_dispatch) => {
     });
 };
 
-export const factionSelectorOpenAction = () => ({
-    type: "faction-selector_open"
+export const factionSelectorOpenAction = (playerId) => ({
+    type: "faction-selector_open",
+    playerId: playerId
 });
 
 export const factionSelectorCloseAction = () => ({
     type: "faction-selector_close"
 });
 
-export const selectFactionAction = (matchId, faction) => (dispatch) => {
+export const selectFactionAction = (matchId, playerId, faction) => (dispatch) => {
     return withLobby(matchId, async (matchLobby) => {
         try {
-            await matchLobby.selectFaction(faction.id);
+            await matchLobby.selectFaction(playerId, faction.id);
             dispatch(factionSelectorCloseAction());
         } catch (err) {
             // TODO Error handling

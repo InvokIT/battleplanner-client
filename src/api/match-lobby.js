@@ -75,8 +75,9 @@ class MatchLobbyApi {
         });
     }
 
-    selectFaction(factionId): void {
+    selectFaction(playerId, factionId): void {
         return this._sendStateChange("select-faction", {
+            playerId: playerId,
             faction: factionId
         });
     }
