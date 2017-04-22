@@ -10,11 +10,6 @@ import LobbyMap from "../LobbyMap";
 import {maps} from "../../config";
 import {mapSelectorOpenAction} from "../../actions/match-lobby";
 
-const isMatchAdmin = flow(
-    get("auth.user.roles"),
-    includes("matchAdmin")
-);
-
 const getMap = (matchId) => (state) => {
     const currentRound = get(`matchLobbies.${matchId}.state.data.currentRound`)(state);
     const mapId = get(`matchLobbies.${matchId}.state.data.rounds[${currentRound}].map`)(state);
@@ -34,7 +29,7 @@ const canSelectMap = (matchId) => (state) => {
         findIndex(t => includes(currentUserId, t))
     )(state);
 
-    return includes(currentStateName, allowedStates) && (currentTeam === teamOfUser || isMatchAdmin(state));
+    return includes(currentStateName, allowedStates) && currentTeam === teamOfUser;
 };
 
 const mapStateToProps = (state, {matchId}) => {
