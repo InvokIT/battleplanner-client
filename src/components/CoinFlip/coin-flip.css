@@ -86,7 +86,7 @@
     font-size: 1.4em;
     text-shadow: black 0 0 0.1em;
     white-space: nowrap;
-    max-width:6em;
+    max-width:7em;
     overflow: hidden;
     text-overflow: ellipsis;
 }

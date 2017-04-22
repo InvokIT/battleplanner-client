@@ -126,7 +126,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width:6em;
+    max-width:7em;
 }
 
 .match-rounds .match-round__victory-points {
