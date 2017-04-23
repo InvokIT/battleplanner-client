@@ -7,7 +7,7 @@ const PlayGameContinueButton = ({canContinue, onButtonClicked}) => {
 
     return (
         <div className="play-game-continue-button">
-            <button onClick={onButtonClicked}>Continue</button>
+            <button onClick={onButtonClicked}>Enter results</button>
         </div>
     );
 };
