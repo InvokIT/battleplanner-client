@@ -1,0 +1,56 @@
+.create-match {
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.round-count-selector {
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin:0 0 1em;
+}
+
+.round-count-selector .round-count-selector__title {
+    display: block;
+}
+
+.round-count-selector ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    margin:0;
+    padding:0;
+}
+
+.round-count-selector li {
+    list-style: none;
+    margin:0 0.5em;
+    padding:0;
+}
+
+.round-count-selector__item {
+    font-size: 2em;
+    color: white;
+    margin:2em;
+    cursor:pointer;
+}
+
+.round-count-selector__item label span {
+    transform:scale(0.8);
+    transition: transform 500ms, color 500ms;
+    display: block;
+    color: rgba(255,255,255,0.5);
+}
+
+.round-count-selector__item input[type=radio] {
+    display: none;
+}
+
+.round-count-selector__item input[type=radio]:checked ~ span {
+    filter:drop-shadow(0 0 0.2em goldenrod) brightness(150%);
+    transform:scale(1);
+    color:white;
+}

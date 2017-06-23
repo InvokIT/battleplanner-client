@@ -11,14 +11,14 @@ import Faction from "../Faction";
 const MatchRounds = ({rounds, currentRoundNumber}) => (
     <div className="match-rounds">
         <div className="match-rounds__title">Rounds</div>
-        <div className="match-rounds__items">
+        <div className={`match-rounds__items match-rounds__items-${rounds.length}`}>
             {rounds.map((round, i) => {
                 const itemClassNames = ["match-round", `match-round_${i}`];
 
                 if (flow(get("winner"), isNil)(round)) {
-                    itemClassNames.push("match-round__played");
-                } else {
                     itemClassNames.push("match-round__not-played");
+                } else {
+                    itemClassNames.push("match-round__played");
                 }
 
                 if (i === currentRoundNumber) {

@@ -36,12 +36,17 @@ export const createMatchNameChange = (name) => ({
     name
 });
 
+export const createMatchRoundCountChange = (roundCount) => ({
+    type: "match-creator_round-count-change",
+    roundCount
+});
+
 export const createMatch = () => (dispatch : t_dispatch, getState) => {
     dispatch(matchCreatingAction());
 
-    const name = get("matchCreator.name", getState());
+    const matchCreatorArgs = get("matchCreator", getState());
 
-    return invokeCreateMatch({name})
+    return invokeCreateMatch(matchCreatorArgs)
         .then(
             match => {
                 dispatch(matchCreatedAction({match}));
