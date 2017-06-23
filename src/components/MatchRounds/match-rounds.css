@@ -30,7 +30,7 @@
 
 .match-rounds .match-round {
     position: relative;
-    width:10em;
+    width:0;
     height:8em;
     background-color: rgba(100,100,100,0.5);
     border:2px solid black;
@@ -42,15 +42,12 @@
     align-items: center;
 }
 
-/*
-.match-round:first-child {
-    margin-left: 1.5em;
+.match-rounds .match-rounds__items-7 .match-round {
+    font-size:0.7em;
 }
 
-.match-round:last-child {
-    margin-right: 1.5em;
+.match-rounds .match-rounds__items-7 .match-round .match-round__winner-player {
 }
-*/
 
 .match-rounds .match-round .match-round__number {
     position:absolute;

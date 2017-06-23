@@ -7,14 +7,14 @@ import {selectFactionAction, factionSelectorCloseAction} from "../../actions/mat
 
 const isVisible = get("factionSelector.isOpen");
 
+const getPlayerId = get("factionSelector.playerId");
+
 const getFactions = (matchId) => (state) => {
     const lobby = get(`matchLobbies.${matchId}`)(state);
     const playerId = getPlayerId(state);
 
     return getSelectableFactions(lobby, playerId);
 };
-
-const getPlayerId = get("factionSelector.playerId");
 
 const mapStateToProps = (state, {matchId}) => {
     const playerId = getPlayerId(state);

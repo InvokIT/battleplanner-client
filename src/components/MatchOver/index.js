@@ -3,7 +3,7 @@ import "./match-over.css";
 
 import React from "react";
 import Player from "../Player";
-import CreateMatchContainer from "../CreateMatchContainer";
+// import CreateMatchContainer from "../CreateMatchContainer";
 import {playerShape} from "../shapes";
 
 const MatchOver = ({winner, showCreateMatch = false}) => {
