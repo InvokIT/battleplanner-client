@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
     return {
         name,
         buttonDisabled: !isNameValid(name),
-        roundCounts: [5, 7],
+        roundCounts: [3, 5, 7],
         selectedRoundCount: getSelectedRoundCount(state)
     };
 };
