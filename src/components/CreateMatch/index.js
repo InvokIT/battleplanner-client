@@ -1,10 +1,38 @@
 import React from 'react';
 import './CreateMatch.css';
 
-const CreateMatch = ({name, buttonDisabled, roundCounts, selectedRoundCount, onNameChange, onSelectedRoundCountChange, onCreateMatch}) => {
+const CreateMatch = ({
+                         name,
+                         buttonDisabled,
+                         playerCounts,
+                         selectedPlayerCount,
+                         roundCounts,
+                         selectedRoundCount,
+                         onNameChange,
+                         onSelectedPlayerCountChange,
+                         onSelectedRoundCountChange,
+                         onCreateMatch
+}) => {
     return (
         <form className="create-match" onSubmit={onCreateMatch}>
             <input type="hidden" placeholder="Match name" value={name} onChange={onNameChange}/>
+            <div className="player-count-selector">
+                <span className="player-count-selector__title">Match type</span>
+                <ul>
+                    {playerCounts.map(playerCount => {
+                        const selected = (playerCount === selectedPlayerCount);
+
+                        return (
+                            <li key={playerCount} className={`player-count-selector__item ${selected ? "player-count-selector__item-selected" : ""}`}>
+                                <label>
+                                    <input type="radio" name="player-count" value={playerCount} onChange={e => onSelectedPlayerCountChange(playerCount)} checked={selected} />
+                                    <span>{playerCount}</span>
+                                </label>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
             <div className="round-count-selector">
                 <span className="round-count-selector__title">Number of rounds</span>
                 <ul>

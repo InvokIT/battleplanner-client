@@ -28,6 +28,11 @@
     align-items: center;
     flex-flow: row nowrap;
     justify-content: flex-start;
+    margin-bottom:2em;
+}
+
+.match-lobby .team .team__slot:last-child {
+    margin-bottom:0;
 }
 
 .match-lobby .team.team_0 .team__slot {

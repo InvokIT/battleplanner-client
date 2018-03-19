@@ -1,12 +1,12 @@
 import React from "react";
 import "./Header.css"
 import LogoutButtonContainer from "../LogoutButtonContainer";
-import gcsLogo from "../../config/gcs/gfx/gcs_logo.png";
+import { logoImage } from "../../config";
 
-const Header = ({user}) => {
+const Header = () => {
     return (
         <div className="header">
-            <img className="header_gcs-logo" src={gcsLogo} alt="Grand Championship Series Logo" />
+            <img className="header_gcs-logo" src={logoImage} />
             <LogoutButtonContainer />
         </div>
     );

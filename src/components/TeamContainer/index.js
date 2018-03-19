@@ -7,7 +7,7 @@ import get from "lodash/fp/get";
 import map from "lodash/fp/map";
 import defaultTo from "lodash/fp/defaultTo";
 import find from "lodash/fp/find";
-import findIndex from "lodash/fp/findIndex";
+import flatten from "lodash/fp/flatten";
 import includes from "lodash/fp/includes";
 import isNil from "lodash/fp/isNil";
 import uniq from "lodash/fp/uniq";
@@ -15,6 +15,10 @@ import first from "lodash/fp/first";
 import filter from "lodash/fp/filter";
 import take from "lodash/fp/take";
 import isEmpty from "lodash/fp/isEmpty";
+import pick from "lodash/fp/pick";
+import difference from "lodash/fp/difference";
+import isEqual from "lodash/fp/isEqual";
+import keys from "lodash/fp/keys";
 import Team from "../Team";
 import {factions, maps} from "../../config";
 import {factionSelectorOpenAction} from "../../actions/match-lobby";
@@ -63,6 +67,23 @@ const getTeamSide = (matchId, teamIndex) => (state): string => {
     return teamSides[teamIndex];
 };
 
+const hasAllPlayersChosenFaction = (matchState): boolean => {
+    const currentRound = get("currentRound")(matchState);
+
+    const allPlayerIds = flow(
+        get("teams"),
+        flatten
+    )(matchState);
+
+    return flow(
+        get(`rounds[${currentRound}.factions`),
+        keys,
+        difference(allPlayerIds),
+        get("length"),
+        isEqual(0)
+    )(matchState);
+};
+
 const getTeam = (matchId, teamIndex) => (state): Array<{ player: object, faction: object }> => {
     const matchState: object = getMatchState(matchId)(state);
     const currentRound = get("currentRound")(matchState);
@@ -77,6 +98,8 @@ const getTeam = (matchId, teamIndex) => (state): Array<{ player: object, faction
 
             if (isNil(player)) {
                 factionId = "missing";
+            } else if (!hasAllPlayersChosenFaction(matchState)) {
+                factionId = "missing"; // Don't show factions before all players have chosen
             } else {
                 factionId = flow(
                     get(`rounds[${currentRound}].factions[${player.id}]`),
@@ -96,18 +119,38 @@ const getTeam = (matchId, teamIndex) => (state): Array<{ player: object, faction
     return players;
 };
 
-const canSelectFaction = (matchId, teamIndex) => (state): boolean => {
+// Return an array of playerIds that can select faction, and only if the current user can select faction for this player
+const canSelectFaction = (matchId, teamIndex) => (state): Array<String> => {
+    const matchState: object = getMatchState(matchId)(state);
+    const currentRound: number = get("currentRound")(matchState);
+
     const allowedStates = ["select-faction", "select-map-or-faction"];
 
     const currentTeam: number = get(`matchLobbies.${matchId}.state.data.currentTeam`)(state);
     const currentUserId: string = get("auth.user.id")(state);
     const currentStateName: string = get(`matchLobbies.${matchId}.state.name`)(state);
-    const teamOfUser = flow(
-        get(`matchLobbies.${matchId}.state.data.teams`),
-        findIndex(t => includes(currentUserId, t))
-    )(state);
 
-    return ((teamOfUser === teamIndex && currentTeam === teamOfUser) || (teamIndex === currentTeam && isMatchAdmin(state))) && includes(currentStateName, allowedStates);
+    if (!includes(currentStateName)(allowedStates)) {
+        return [];
+    }
+
+    const playerIdsOnTeam = flow(
+        get(`teams[${currentTeam}]`)
+    )(matchState);
+
+    // dict of playerId to factionId
+    const factionsOfTeam = flow(
+        get(`rounds[${currentRound}].factions`),
+        pick(playerIdsOnTeam)
+    )(matchState);
+
+    // Find the playerId that can select faction now
+    const playerThatCanSelectFaction = find(pId => factionsOfTeam[pId] == null)(playerIdsOnTeam);
+
+    // If that playerId is the current user or the user is admin, return that playerId
+    if (playerThatCanSelectFaction === currentUserId || isMatchAdmin(state)) {
+        return [playerThatCanSelectFaction];
+    }
 };
 
 const getStartingPositions = (matchId, teamIndex) => (state): ?Array<number> => {

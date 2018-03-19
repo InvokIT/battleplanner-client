@@ -119,18 +119,10 @@ const getMatchStateDescription = (matchId) => (state) => {
         get("state.data.currentTeam")
     )(state);
 
-    const currentPlayerId = flow(
-        getLobby(matchId),
-        get(`state.data.teams[${currentTeam}]`),
-        head
-    )(state);
-
-    const currentPlayer = get(`users.${currentPlayerId}`)(state);
-
     const currentStateName = getMatchStateName(matchId)(state);
 
     if (currentStateName in matchStateDescriptions) {
-        return matchStateDescriptions[currentStateName](currentPlayer);
+        return matchStateDescriptions[currentStateName](currentTeam);
     } else {
         return "";
     }

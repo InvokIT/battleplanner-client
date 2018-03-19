@@ -41,6 +41,11 @@ export const createMatchRoundCountChange = (roundCount) => ({
     roundCount
 });
 
+export const createMatchPlayerCountChange = (playerCount) => ({
+    type: "match-creator_player-count-change",
+    playerCount
+});
+
 export const createMatch = () => (dispatch : t_dispatch, getState) => {
     dispatch(matchCreatingAction());
 

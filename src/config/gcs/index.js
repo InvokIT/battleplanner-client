@@ -25,8 +25,11 @@ import factionOstheerImage from "./gfx/faction_german.png";
 import factionSovietImage from "./gfx/faction_soviet.png";
 import factionOkwImage from "./gfx/faction_west_german.png";
 import factionMissingImage from "./gfx/faction_missing.png";
+import gcsLogo from "./gfx/gcs_logo.png";
 
 export const teamSize = 1;
+
+export const logoImage = gcsLogo;
 
 export const maps = [
     {

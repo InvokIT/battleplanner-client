@@ -1,11 +1,11 @@
 import get from "lodash/fp/get";
 
 export default {
-    "assign-players-to-teams": (player) => "Join your teams",
-    "choose-initiator": (player) => "Who picks first?",
-    "play-game": (player) => "Play the game!",
-    "post-result-and-replays": (player) => "Waiting for match results",
-    "select-faction": (player) => `It is ${get("displayName", player)}'s turn to select faction`,
-    "select-map": (player) => `It is ${get("displayName", player)}'s turn to select map`,
-    "select-map-or-faction": (player) => `It is ${get("displayName", player)}'s turn to select map OR faction`
+    "assign-players-to-teams": (teamId) => "Join your teams",
+    "choose-initiator": (teamId) => "Who picks first?",
+    "play-game": (teamId) => "Play the game!",
+    "post-result-and-replays": (teamId) => "Waiting for match results",
+    "select-faction": (teamId) => `It is Team ${teamId + 1}'s turn to select faction`,
+    "select-map": (teamId) => `It is Team ${teamId + 1}'s turn to select map`,
+    "select-map-or-faction": (teamId) => `It is Team ${teamId + 1}'s turn to select map OR faction`
 };

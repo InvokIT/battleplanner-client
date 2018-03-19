@@ -3,6 +3,7 @@ import "./team.css";
 
 import React from "react";
 import noop from "lodash/fp/noop";
+import includes from "lodash/fp/includes";
 import {playerAndFactionShape} from "../shapes";
 import PlayerWithFaction from "../PlayerWithFaction";
 import StartingPositions from "../StartingPositions";
@@ -10,7 +11,7 @@ import StartingPositions from "../StartingPositions";
 const Team = ({
                   teamIndex,
                   team,
-                  canSelectFaction = false,
+                  canSelectFaction = [],
                   onSelectFactionClick = noop,
                   startingPositions
               }) => (
@@ -19,7 +20,7 @@ const Team = ({
             {team.map((playerAndFaction, slotIndex) => (
                 <div key={slotIndex} className="team__slot">
                     <PlayerWithFaction player={playerAndFaction.player} faction={playerAndFaction.faction}
-                                       canSelectFaction={canSelectFaction} onSelectFactionClick={onSelectFactionClick}/>
+                                       canSelectFaction={includes(playerAndFaction.player.id)(canSelectFaction)} onSelectFactionClick={onSelectFactionClick}/>
                 </div>
             ))}
         </div>
@@ -30,7 +31,7 @@ const Team = ({
 Team.propTypes = {
     teamIndex: React.PropTypes.number.isRequired,
     team: React.PropTypes.arrayOf(playerAndFactionShape).isRequired,
-    canSelectFaction: React.PropTypes.bool,
+    canSelectFaction: React.PropTypes.arrayOf(React.PropTypes.string),
     onSelectFactionClick: React.PropTypes.func,
     startingPositions: React.PropTypes.arrayOf(React.PropTypes.number)
 };
