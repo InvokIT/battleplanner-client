@@ -6,7 +6,7 @@ import { logoImage } from "../../config";
 const Header = () => {
     return (
         <div className="header">
-            <img className="header_gcs-logo" src={logoImage} />
+            <img className="header_utt-logo" src={logoImage} />
             <LogoutButtonContainer />
         </div>
     );

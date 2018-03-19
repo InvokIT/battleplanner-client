@@ -28,3 +28,12 @@
     /*top:0.5em;*/
     /*left:14em;*/
 }
+
+.header_utt-logo {
+    /*position:absolute;*/
+    margin:1em 0 -1em;
+    height:6em;
+    z-index:1;
+    /*top:0.5em;*/
+    /*left:14em;*/
+}
